@@ -116,7 +116,6 @@ void LL<valType>::insertionAtBegin(valType val)
         head = newNode;
     }
     count++;
-    cout << "Element inserted successfully";
 }
 
 template <typename valType>
@@ -137,7 +136,6 @@ void LL<valType>::insertionAtMiddle(int index, valType val)
     newNode->next = traverse->next;
     traverse->next = newNode;
     count++;
-    cout << "Element inserted successfully";
 }
 
 template <typename valType>
@@ -163,7 +161,6 @@ void LL<valType>::insertionAtEnd(valType val)
         traverse->next = newNode;
     }
     count++;
-    cout << "Element inserted successfully";
 }
 
 template <typename valType>

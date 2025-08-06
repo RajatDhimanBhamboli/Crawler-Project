@@ -88,6 +88,5 @@ char * downloadfile(char * url,char *dirctorypath){
         cerr<<"Error failed to Download";
         return nullptr;
      }
-     cout<<"Successfull";
      return command;
 }

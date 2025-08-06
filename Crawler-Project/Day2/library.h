@@ -21,7 +21,6 @@ void createdirectory(char *path){
         }
 }
 char * longnumbertostring(long long time){
-        cout<<"\ntime hai in numbr: "<<time;
 
     int sum=0,n=0;
     char * name = (char*)malloc(30);
@@ -31,7 +30,6 @@ char * longnumbertostring(long long time){
         reversenumber=reversenumber*10+n;
         time/=10;
     }
-    cout<<"\n reverse nukmbver : "<<reversenumber;
     int i=0;
     while (reversenumber>0)
     {
@@ -44,7 +42,6 @@ char * longnumbertostring(long long time){
     char html[]={'.','h','t','m','l','\0'};
     my_strcat(name,html);
    
-        cout<<"\ntime hai in string: "<<name;   
 
     return name;
 }
@@ -52,7 +49,6 @@ char * longnumbertostring(long long time){
 char * generateUniqueName(){
     
     time_t now=time(0);
-    cout<<"\ntime hai in numbr: "<<now;
     char *tostring=longnumbertostring(now);     
     return tostring;
 }
@@ -89,7 +85,6 @@ char * downloadfile(char * url,char *dirctorypath){
         cerr<<"Error failed to Download";
         return nullptr;
      }
-     cout<<"Successfull";
      return fileurl;
 }
 

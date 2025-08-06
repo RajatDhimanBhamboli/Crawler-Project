@@ -1,0 +1,6 @@
+Url is : https://www.codequotient.com/./pages/1754501905.html , FrequentWord : ai, Count : 33
+Url is : https://www.newindianexpress.com/magazine/2017/nov/18/sultans--of-skill-1703090.html/./pages/1754501911.html , FrequentWord : https, Count : 18
+Url is : https://www.codequotient.com/./pages/1754502273.html , FrequentWord : ai, Count : 33
+Url is : https://www.newindianexpress.com/magazine/2017/nov/18/sultans--of-skill-1703090.html/./pages/175450228.html , FrequentWord : com, Count : 17
+Url is : https://www.codequotient.com/./pages/1754502674.html , FrequentWord : ai, Count : 33
+Url is : https://www.newindianexpress.com/magazine/2017/nov/18/sultans--of-skill-1703090.html/./pages/1754502682.html , FrequentWord : students, Count : 16
