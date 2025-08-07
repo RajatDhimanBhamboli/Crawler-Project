@@ -1,6 +1,39 @@
-Url is : https://www.codequotient.com/./pages/1754501905.html , FrequentWord : ai, Count : 33
-Url is : https://www.newindianexpress.com/magazine/2017/nov/18/sultans--of-skill-1703090.html/./pages/1754501911.html , FrequentWord : https, Count : 18
-Url is : https://www.codequotient.com/./pages/1754502273.html , FrequentWord : ai, Count : 33
-Url is : https://www.newindianexpress.com/magazine/2017/nov/18/sultans--of-skill-1703090.html/./pages/175450228.html , FrequentWord : com, Count : 17
-Url is : https://www.codequotient.com/./pages/1754502674.html , FrequentWord : ai, Count : 33
-Url is : https://www.newindianexpress.com/magazine/2017/nov/18/sultans--of-skill-1703090.html/./pages/1754502682.html , FrequentWord : students, Count : 16
+Url is : https://www.homeandlearn.co.uk/WD/wds5pA.html    o  ./pages/1754570203.html , FrequentWord : quot, Count : 48
+Url is : https://www.homeandlearn.co.uk/index.html    o  ./pages/1754570204.html , FrequentWord : beginners, Count : 12
+Url is : https://www.homeandlearn.co.uk/articles/1-page-articles.html    o  ./pages/1754570205.html , FrequentWord : vitag, Count : 9
+Url is : https://www.homeandlearn.co.uk/android/android.html    o  ./pages/1754570207.html , FrequentWord : android, Count : 29
+Url is : https://www.homeandlearn.co.uk/BC/BeginnersComputing.html    o  ./pages/1754570208.html , FrequentWord : beginners, Count : 9
+Url is : https://www.homeandlearn.co.uk/csharp/csharp.html    o  ./pages/1754570209.html , FrequentWord : net, Count : 35
+Url is : https://www.homeandlearn.co.uk/data-analysis-pandas/data-analysis-pandas.html    o  ./pages/175457021.html , FrequentWord : pandas, Count : 14
+Url is : https://www.homeandlearn.co.uk/NET/excel_vba.html    o  ./pages/1754570211.html , FrequentWord : beginners, Count : 8
+Url is : https://www.homeandlearn.co.uk/games-programming/3d-games-programming.html    o  ./pages/1754570212.html , FrequentWord : unity, Count : 28
+Url is : https://www.homeandlearn.co.uk/extras/intermediate-programming.html    o  ./pages/1754570214.html , FrequentWord : vitag, Count : 15
+Url is : https://www.homeandlearn.co.uk/java/java.html    o  ./pages/1754570215.html , FrequentWord : java, Count : 49
+Url is : https://www.homeandlearn.co.uk/javascript/javascript.html    o  ./pages/1754570216.html , FrequentWord : javascript, Count : 31
+Url is : https://www.homeandlearn.co.uk/access/microsoft-access.html    o  ./pages/1754570218.html , FrequentWord : access, Count : 14
+Url is : https://www.homeandlearn.co.uk/word2007_2010/Word-2007-2010.html    o  ./pages/1754570219.html , FrequentWord : word, Count : 30
+Url is : https://www.homeandlearn.co.uk/excel2007/Excel2007.html    o  ./pages/175457022.html , FrequentWord : excel, Count : 50
+Url is : https://www.homeandlearn.co.uk/power-bi/power-bi.html    o  ./pages/1754570221.html , FrequentWord : power, Count : 16
+Url is : https://www.homeandlearn.co.uk/php/php.html    o  ./pages/1754570222.html , FrequentWord : php, Count : 66
+Url is : https://www.homeandlearn.co.uk/python/python.html    o  ./pages/1754570224.html , FrequentWord : beginners, Count : 7
+Url is : https://www.homeandlearn.co.uk/NET/vbNet.html    o  ./pages/1754570225.html , FrequentWord : vb, Count : 75
+Url is : https://www.homeandlearn.co.uk/WD/WebDesign.html    o  ./pages/1754570226.html , FrequentWord : css, Count : 30
+Url is : https://www.homeandlearn.co.uk/WD/wds5p1.html    o  ./pages/1754570227.html , FrequentWord : web, Count : 20
+Url is : https://www.homeandlearn.co.uk/WD/wds5p2.html    o  ./pages/1754570228.html , FrequentWord : quot, Count : 72
+Url is : https://www.homeandlearn.co.uk/extras/intermediate-programming.html    o  ./pages/1754570532.html , FrequentWord : vitag, Count : 15
+Url is : https://www.homeandlearn.co.uk/index.html    o  ./pages/1754570533.html , FrequentWord : beginners, Count : 12
+Url is : https://www.homeandlearn.co.uk/articles/1-page-articles.html    o  ./pages/1754570534.html , FrequentWord : vitag, Count : 9
+Url is : https://www.homeandlearn.co.uk/android/android.html    o  ./pages/1754570535.html , FrequentWord : android, Count : 29
+Url is : https://www.homeandlearn.co.uk/BC/BeginnersComputing.html    o  ./pages/1754570536.html , FrequentWord : beginners, Count : 9
+Url is : https://www.homeandlearn.co.uk/csharp/csharp.html    o  ./pages/1754570537.html , FrequentWord : net, Count : 35
+Url is : https://www.homeandlearn.co.uk/data-analysis-pandas/data-analysis-pandas.html    o  ./pages/1754570538.html , FrequentWord : pandas, Count : 14
+Url is : https://www.homeandlearn.co.uk/NET/excel_vba.html    o  ./pages/1754570539.html , FrequentWord : beginners, Count : 8
+Url is : https://www.homeandlearn.co.uk/games-programming/3d-games-programming.html    o  ./pages/175457054.html , FrequentWord : unity, Count : 28
+Url is : https://www.homeandlearn.co.uk/java/java.html    o  ./pages/1754570542.html , FrequentWord : java, Count : 49
+Url is : https://www.homeandlearn.co.uk/javascript/javascript.html    o  ./pages/1754570543.html , FrequentWord : javascript, Count : 31
+Url is : https://www.homeandlearn.co.uk/access/microsoft-access.html    o  ./pages/1754570545.html , FrequentWord : access, Count : 14
+Url is : https://www.homeandlearn.co.uk/word2007_2010/Word-2007-2010.html    o  ./pages/1754570546.html , FrequentWord : word, Count : 30
+Url is : https://www.homeandlearn.co.uk/excel2007/Excel2007.html    o  ./pages/1754570547.html , FrequentWord : excel, Count : 50
+Url is : https://www.homeandlearn.co.uk/power-bi/power-bi.html    o  ./pages/1754570548.html , FrequentWord : power, Count : 16
+Url is : https://www.homeandlearn.co.uk/php/php.html    o  ./pages/1754570549.html , FrequentWord : php, Count : 66
+Url is : https://www.homeandlearn.co.uk/python/python.html    o  ./pages/1754570551.html , FrequentWord : beginners, Count : 7
