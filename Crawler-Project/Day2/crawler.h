@@ -195,6 +195,19 @@ public:
 
         return false;
     }
+    char *deleteSlash(const char *url)
+    {
+        int length = stringlength(url);
+        char *changeurl = new char[length + 1];
+        my_strcpy(changeurl, url);
+
+        if (length > 0 && changeurl[length - 1] == '/')
+        {
+            changeurl[length - 1] = '\0';
+        }
+
+        return changeurl;
+    }
     void toAbsoluteUrl(const char *base_url, const char *relative_url, char *absolute_url)
     {
         if (!base_url || !relative_url || !absolute_url)
@@ -207,22 +220,18 @@ public:
         my_strcpy(absolute_url, base_url);
         int len = stringlength(absolute_url);
 
-        // Ensure base_url has no trailing slash
         if (len > 0 && absolute_url[len - 1] == '/')
         {
             absolute_url[len - 1] = '\0';
             len--;
         }
 
-        // Handle root-relative URLs or anchors
         if (relative_url[0] == '#')
         {
-            // Skip anchors (or handle differently if needed)
             absolute_url[0] = '\0';
             return;
         }
 
-        // Add slash for non-root-relative URLs
         if (relative_url[0] != '/')
         {
             my_strcat(absolute_url, "/");
@@ -245,7 +254,6 @@ public:
             delete[] absolutepath;
             return nullptr;
         }
-        cout << "\nReading file: " << filepath << "\n";
         ifstream in(filepath, ios::in);
         if (!in.is_open())
         {
@@ -261,13 +269,17 @@ public:
         bool anchorTag = false;
         bool hrefMatch = false;
         bool readingUrl = false;
+        bool quotes = false;
         int urlIndex = 0;
         const char hrefPattern[] = "href=";
         int hrefIndex = 0;
         int wordindex = 0;
         bool insideStyle = false;
         char styleBuffer[10];
+        char scriptbuffer[13];
+        int scriptindex = 0;
         int styleIndex = 0;
+        bool insidescript = 0;
 
         while (in.get(ch))
         {
@@ -275,28 +287,46 @@ public:
             if (ch == '<')
             {
                 styleIndex = 0;
+                scriptindex = 0;
                 styleBuffer[styleIndex++] = ch;
+                scriptbuffer[scriptindex++] = ch;
             }
             else if (styleIndex > 0 && styleIndex < 9)
             {
                 styleBuffer[styleIndex++] = ch;
                 styleBuffer[styleIndex] = '\0';
-
-                if (isEqualInsensitive(styleBuffer, "<style", 6))
+                if (my_strcasestr(styleBuffer, "<style"))
                 {
                     insideStyle = true;
                     styleIndex = 0;
                 }
-                if (isEqualInsensitive(styleBuffer, "</style", 7))
+                if (my_strcasestr(styleBuffer, "</style"))
                 {
                     insideStyle = false;
                     styleIndex = 0;
                 }
             }
-            if (insideStyle)
+            else if (scriptindex > 0 && scriptindex < 10)
+            {
+                scriptbuffer[scriptindex++] = ch;
+                scriptbuffer[scriptindex] = '\0';
+                if (my_strcasestr(scriptbuffer, "<script"))
+                {
+                    insidescript = true;
+                    scriptindex = 0;
+                }
+                if (my_strcasestr(scriptbuffer, "</script"))
+                {
+                    insidescript = false;
+                    scriptindex = 0;
+                }
+            }
+
+            if (insideStyle || insidescript)
             {
                 continue;
             }
+
             if (ch == '<')
             {
                 insideTag = true;
@@ -324,32 +354,30 @@ public:
                     if (!readingUrl)
                     {
                         urls[urlIndex] = '\0';
-                        cout << "\n"
-                             << urls << "urls hai ji \n";
 
                         if (isCrawlablePage(urls) && ((startwiht(urls, "http") || startwiht(urls, "https"))))
                         {
-                            if (!obj->searching(urls))
+                            char *normalizedUrl = deleteSlash(urls);
+                            cout << "\n\n"
+                                 << "hello ji o" << urls << "\n";
+
+                            if (!obj->searching(normalizedUrl))
                             {
-                                cout << "\n"
-                                     << "hare 1" << "\n";
-                                char *urlCopy = new char[stringlength(urls) + 1];
-                                my_strcpy(urlCopy, urls);
-                                
+                                char *urlCopy = new char[stringlength(normalizedUrl) + 1];
+                                my_strcpy(urlCopy, normalizedUrl);
+
                                 ll->insertionAtEnd(urlCopy);
+                                delete[] normalizedUrl;
                             }
                         }
                         else if (urls[0] == '/')
                         {
-                            cout << "Base URL: " << urlpath << "\nRelative URL: " << urls << endl;
                             absolutepath[0] = '\0';
                             toAbsoluteUrl(urlpath, urls, absolutepath);
-                            cout << "Absolute URL: " << absolutepath << endl;
 
                             if (isCrawlablePage(absolutepath) && !obj->searching(absolutepath))
                             {
                                 char *urlCopy = new char[stringlength(absolutepath) + 1]();
-                                cout << "Added to list: " << absolutepath << endl;
                                 my_strcpy(urlCopy, absolutepath);
                                 ll->insertionAtEnd(urlCopy);
                             }
@@ -372,35 +400,6 @@ public:
                         //     }
                         // }
 
-                        //     urls[urlIndex] = '\0';
-                        //     // make absolute path
-                        //     char absolutepath[1000];
-                        //     if (urls[0] == '/' && !(isCrawlablePage(urlpath)))
-                        //     {
-                        //         my_strcat(absolutepath, urlpath);
-                        //         my_strcat(absolutepath, urls);
-                        //     }
-                        //     else if (urls[0] == '.' && urls[1] == '/'){
-                        //         for(int i=0;i<stringlength(urls)-1;i++){
-                        //             urls[i]=urls[i+1];
-                        //         }
-                        //         my_strcat(absolutepath,urlpath);
-                        //         my_strcat(absolutepath,urls);
-                        //     }
-                        //         // if (checkurl(urls) || my_strstr(urls, "/")) {
-                        //         if ((startwiht(urls, "http") || startwiht(urls, "https")) &&
-                        //             (isCrawlablePage(urls)))
-                        //         {
-                        //             if (!obj->searching(urls))
-                        //             {
-                        //                 char *urlCopy = new char[stringlength(urls) + 1];
-                        //                 my_strcpy(urlCopy, urls);
-                        //                 ll->insertionAtEnd(urlCopy);
-                        //                 // obj->insertion(urlCopy,directorypath );
-                        //             }
-                        //         }
-                        //         else if()
-
                         urlIndex = 0;
                         hrefMatch = false;
                     }
@@ -414,8 +413,12 @@ public:
                     hrefIndex = 0;
                 }
             }
+            if (ch == '"' && !quotes)
+            {
+                quotes = true;
+            }
 
-            if (!insideTag)
+            if (!insideTag && !quotes)
             {
                 if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z'))
                 {
@@ -426,7 +429,10 @@ public:
                     Allcharacter[wordindex++] = ' ';
                 }
             }
-
+            if (ch == '"' && quotes)
+            {
+                quotes = false;
+            }
             if (ch == '>')
             {
                 insideTag = false;
@@ -455,14 +461,25 @@ public:
             "them", "its", "which", "will", "their", "been", "if", "can", "would",
             "do", "does", "did", "so", "about", "my", "your", "me", "no", "just",
             "https", "http", "com", "www", "html", "content", "style", "script",
-            "page", "news", "article", "image", "img"};
+            "page", "news", "article", "image", "img", "a", "am", "an", "and",
+            "are", "at", "because", "but", "by", "can", "could", "did", "do",
+            "does", "for", "had", "has", "have", "how", "if", "in", "is", "js", "may",
+            "might", "must", "my", "of", "on", "or", "shall", "should", "the",
+            "to", "was", "were", "what", "when", "where", "while", "who", "why", "will",
+            "with", "would", "you", "your", ".aac", ".aax", ".ai", ".aiff",
+            ".alac", ".ape", ".au", ".avi", ".avif", ".bmp", ".bpg", ".css", ".dss",
+            ".eot", ".eps", ".f4v", ".flac", ".flv", ".gif", ".gsm", ".heic", ".heif",
+            ".ico", ".java", ".jpeg", ".jpg", ".js", ".json", ".jsx", ".less", ".m4a",
+            ".m4v", ".mkv", ".mov", ".mp3", ".mp4", ".mpc", ".mpeg", ".mpg", ".ogg",
+            ".otf", ".pdf", ".png", ".psd", ".py", ".raw", ".sass", ".scss", ".svg",
+            ".tif", ".tiff", ".ts", ".tsx", ".ttf", ".wav", ".webm", ".webp", ".wma",
+            ".wmv", ".woff", ".woff2"};
         int stopcount = sizeof(stopwords) / sizeof(stopwords[0]);
         char *cleanText = normalize_whitespace(Allcharacter);
-        cout << "hare krishna\n\n\n";
         char arr[200] = {"\0"};
         my_strcat(arr, urlpath);
 
-        my_strcat(arr, "    o  ");
+        my_strcat(arr, "   ");
         my_strcat(arr, filepath);
         cout << arr << "Arr hai ji";
         most_frequent_word(cleanText, stopwords, stopcount, arr);
@@ -471,10 +488,9 @@ public:
         return ll;
     }
 
-    void recursiveCrawler(char *url, char *dirctorypath, int maxDepth)
+    void
+    recursiveCrawler(char *url, char *dirctorypath, int maxDepth)
     {
-        cout << "\n\n\n\n"
-             << url << dirctorypath << maxDepth << "url hai ji obhai\n\n\n\n";
         if (!url || !dirctorypath || maxDepth <= 0)
         {
             return;
@@ -485,42 +501,40 @@ public:
             return;
         }
 
-        Node<char *, char *> *node = obj->searching(url);
+        char *urlslash = deleteSlash(url);
+        Node<char *, char *> *node = obj->searching(urlslash);
         if (node)
         {
+            delete[] urlslash;
             return;
         }
 
-        char *urlCopy = new char[stringlength(url) + 1];
-        my_strcpy(urlCopy, url);
+        char *urlCopy = new char[stringlength(urlslash) + 1];
+        my_strcpy(urlCopy, urlslash);
 
         char *filepath = downloadfile(urlCopy, dirctorypath);
-        cout << "\n\n\n\n"
-             << filepath << " " << urlCopy << "download\n\n\n\n";
 
         if (!filepath)
         {
             delete[] urlCopy;
+            delete[] urlslash;
             return;
         }
 
         obj->insertion(urlCopy, filepath);
 
         LL<char *> *links = readfile(filepath, dirctorypath, urlCopy);
-        cout << "\n\n\n\n"
-             << links << "loopp" << "\n\n\n\n";
 
         llNode<char *> *head = links->gethead();
         while (head)
         {
-            cout << "\n\n\n\n"
-                 << head->val << "pooop" << "\n\n\n\n";
             recursiveCrawler(head->val, dirctorypath, maxDepth - 1);
             head = head->next;
         }
         delete links;
         delete[] filepath;
     }
+
     int stringlength(const char *str)
     {
         int count = 0;
@@ -535,16 +549,15 @@ public:
     bool my_strcmp(const char *a, const char *b)
     {
         int i = 0;
-        while (a[i] != '\0')
+        while (a[i] != '\0' && b[i] != '\0')
         {
             if (a[i] != b[i])
-            {
                 return false;
-            }
             i++;
         }
-        return true;
+        return a[i] == '\0' && b[i] == '\0';
     }
+
     char *my_strcat(char *dest, const char *src)
     {
         int i = 0;
@@ -571,92 +584,6 @@ public:
         dest[i] = '\0';
         return dest;
     }
-    // LL<char *> *readfile(char *filepath, char *dirctorypath)
-    // {
-    //     char *urls = new char[1000];
-    //     cout << "\n"
-    //          << filepath << "\n";
-    //     ifstream in(filepath, ios::in);
-    //     if (!in || !in.is_open())
-    //     {
-    //         cout << "Can't read\n";
-    //         delete[] urls;
-    //         return nullptr;
-    //     }
-    //     char ch;
-    //     bool insideTag = false;
-    //     char buffer[10];
-    //     int bufIndex = 0;
-    //     bool readingUrl = false;
-    //     int urlIndex = 0;
-    //     while (in.get(ch))
-    //     {
-    //         if (ch == '<')
-    //         {
-    //             insideTag = true;
-    //             bufIndex = 0;
-    //         }
-    //         if (insideTag && bufIndex < 9)
-    //         {
-    //             buffer[bufIndex++] = ch;
-    //             buffer[bufIndex] = '\0';
-    //             if (bufIndex == 2 && (buffer[1] == 'a' || buffer[1] == 'A'))
-    //             {
-    //                 char temp[10];
-    //                 int tempIndex = 0;
-    //                 while (in.get(ch) && tempIndex < 6)
-    //                 {
-    //                     temp[tempIndex++] = ch;
-    //                     if (tempIndex >= 5 && isEqualInsensitive(temp + tempIndex - 5, "href="))
-    //                     {
-    //                         in.get(ch);
-    //                         if (ch == '"' )
-    //                         {
-    //                             char quoteChar = ch;
-    //                             urlIndex = 0;
-    //                             while (in.get(ch) && ch != quoteChar && urlIndex < 999)
-    //                             {
-    //                                 urls[urlIndex++] = ch;
-    //                             }
-    //                             urls[urlIndex] = '\0';
-    //                             // if ((startwiht(urls, "http") || startwiht(urls, "https")) &&
-    //                             //     (endsWith(urls, ".html") || endsWith(urls, "/") || endsWith(urls, ".php") || endsWith(urls, ".aspx") || endsWith(urls, ".htm") || endsWith(urls, ".jsp")))
-    //                             // {
-    //                             // if(endsWith(urls,"/")){
-    //                             cout<<"\n\n\n\n"<<urls<<"\n\n";
-    //                              if ((startwiht(urls, "http") || startwiht(urls, "https")) &&
-    //                                 ( endsWith(urls, "/") ))
-    //                             {
-    //                                 cout<<"\n\n\n\n"<<urls<<"\n\n";
-    //                                 if (!obj->searching(urls))
-    //                                 {
-    //                                     // return nullptr ;
-    //                                     char *urlCopy = new char[stringlength(urls) + 1];
-    //                                     my_strcpy(urlCopy, urls);
-    //                                     ll->insertionAtEnd(urlCopy);
-    //                                     // obj->insertion(urlCopy, 0); // Mark as unvisited
-    //                                 }
-    //                             }
-    //                         }
-    //                     }
-    //                 }
-    //                 insideTag = false;
-    //             }
-    //         }
-    //         if (ch == '>')
-    //         {
-    //             insideTag = false;
-    //             bufIndex = 0;
-    //         }
-    //     }
-    //     in.close();
-    //     delete[] urls;
-    //     cout << "\n\nNewly Created HashTable: ";
-    //     obj->displayHash();
-    //     cout << "\n\nNewly linked list return ki hai  HashTable: ";
-    //     ll->display();
-    //     return ll;
-    // }
 
     char *my_strchr(const char *s, int c)
     {
@@ -803,29 +730,38 @@ public:
     char *my_strcasestr(const char *haystack, const char *needle)
     {
         int i = 0;
-        needle = lowercase(needle);
-        haystack = lowercase(haystack);
+
+        char *lower_needle = lowercase(needle);
+        char *lower_haystack = lowercase(haystack);
         while (haystack[i] != '\0')
         {
             int j = 0;
-            while (needle[j] != '\0' && haystack[i + j] == needle[j])
+            while (lower_needle[j] != '\0' && lower_haystack[i + j] == lower_needle[j])
             {
                 j++;
             }
-            if (needle[j] == '\0')
+            if (lower_needle[j] == '\0')
             {
                 return (char *)&haystack[i];
             }
             i++;
         }
+        free(lower_needle);
+        free(lower_haystack);
         return NULL;
     }
 
     void most_frequent_word(char *text, const char **stopwords, int stopcount, char *url)
     {
         char *lower_text = lowercase(text);
+        if (!lower_text)
+        {
+            cout << "Error: Memory allocation failed for lower_text\n";
+            return;
+        }
+     
         hashTable<char *, int> *obj = new hashTable<char *, int>();
-        char sample[2000][100];
+        char sample[20000][100];
         int flag = 0, wordIndex = 0, charIndex = 0;
 
         for (int i = 0; lower_text[i] != '\0'; i++)
@@ -847,38 +783,58 @@ public:
                 sample[wordIndex][charIndex] = '\0';
                 wordIndex++;
                 flag = 0;
-                if (wordIndex >= 2000)
+                if (wordIndex >= 20000)
                 {
-                    cout << "Warning: Too many words, truncating\n";
+                    cout << "Warning: Too many words\n";
                     break;
                 }
             }
         }
 
-        if (flag == 1 && wordIndex < 2000)
+        if (flag == 1 && wordIndex < 20000)
         {
             sample[wordIndex][charIndex] = '\0';
             wordIndex++;
         }
 
+        char **lower_stopwords = new char *[stopcount];
+        for (int i = 0; i < stopcount; i++)
+        {
+            lower_stopwords[i] = lowercase(stopwords[i]);
+            if (!lower_stopwords[i])
+            {
+                cout << "Error: Memory allocation failed for stopword\n";
+                // Cleanup aur exit
+                for (int j = 0; j < i; j++)
+                {
+                    free(lower_stopwords[j]);
+                }
+                delete[] lower_stopwords;
+                free(lower_text);
+                delete obj;
+                return;
+            }
+        }
         for (int k = 0; k < wordIndex; k++)
         {
             bool isStopword = false;
             for (int j = 0; j < stopcount; j++)
             {
-                char *stopword_lower = lowercase(stopwords[j]);
-                if (my_strcmp(sample[k], stopword_lower))
+                if (my_strcmp(sample[k], lower_stopwords[j]))
                 {
                     isStopword = true;
-                    free(stopword_lower);
                     break;
                 }
-                free(stopword_lower);
             }
 
-            if (!isStopword)
+            if (!isStopword && stringlength(sample[k]) > 1)
             {
                 char *wordCopy = new char[stringlength(sample[k]) + 1];
+                if (!wordCopy)
+                {
+                    cout << "Error: Memory allocation failed for wordCopy\n";
+                    continue;
+                }
                 my_strcpy(wordCopy, sample[k]);
 
                 Node<char *, int> *node = obj->searching(wordCopy);
@@ -894,7 +850,7 @@ public:
             }
         }
 
-        char mostWord[50] = "";
+        char mostWord[100] = "";
         int maxCount = 0;
         for (int b = 0; b < obj->hashSize; b++)
         {
@@ -904,6 +860,7 @@ public:
                 if (temp->value > maxCount)
                 {
                     maxCount = temp->value;
+
                     my_strcpy(mostWord, temp->key);
                 }
                 temp = temp->next;
@@ -911,14 +868,20 @@ public:
         }
 
         cout << "\nHash Table Contents:\n";
+        obj->displayHash();
         cout << "\nMost frequent word: " << mostWord << " (Count: " << maxCount << ")\n";
         ofstream out("seo_data.txt", ios::app);
 
         if (out.is_open())
         {
-            out << "Url is : " << url << " , FrequentWord : " << mostWord << ", Count : " << maxCount << "\n";
+            out << "Url is : " << url << " , FrequentWord ->" << mostWord << ", Count : " << maxCount << "\n";
             out.close();
         }
+        for (int i = 0; i < stopcount; i++)
+        {
+            free(lower_stopwords[i]);
+        }
+        delete[] lower_stopwords;
         free(lower_text);
         delete obj;
     }
