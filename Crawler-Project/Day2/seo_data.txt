@@ -1,8 +1,5 @@
 Url is : https://www.codequotient.com   ./pages/1754636791.html , FrequentWord ->codequotient, Count : 78
-Url is : https://www.newindianexpress.com/magazine/2017/nov/18/sultans--of-skill-1703090.html   ./pages/1754636795.html , FrequentWord ->null, Count : 917
-Url is : https://www.newindianexpress.com/magazine/2017/Nov/18/sultans--of-skill-1703090.html   ./pages/1754636798.html , FrequentWord ->null, Count : 917
 Url is : https://www.newindianexpress.com/amp/story/magazine/2017/Nov/18/sultans--of-skill-1703090.html   ./pages/1754636802.html , FrequentWord ->students, Count : 40
-Url is : https://www.newindianexpress.com   ./pages/1754636804.html , FrequentWord ->null, Count : 1344
 Url is : https://api.whatsapp.com/send?text=https%3A%2F%2Fwww.newindianexpress.com%2Fmagazine%2F2017%2FNov%2F18%2Fsultans--of-skill-1703090.html   ./pages/1754636807.html , FrequentWord ->php, Count : 198
 Url is : https://www.facebook.com/sharer.php?u=https%3A%2F%2Fwww.newindianexpress.com%2Fmagazine%2F2017%2FNov%2F18%2Fsultans--of-skill-1703090.html   ./pages/175463681.html , FrequentWord ->php, Count : 110
 Url is : https://www.linkedin.com/feed/update/urn:li:activity:7321073408849387520   ./pages/1754636813.html , FrequentWord ->linkedin, Count : 12
@@ -14,3 +11,13 @@ Url is : https://www.linkedin.com/pulse/topics/hr-management-s50359   ./pages/17
 Url is : https://www.linkedin.com/pulse/topics/engineering-s166   ./pages/1754636841.html , FrequentWord ->contributions, Count : 98
 Url is : https://www.linkedin.com/pulse/topics/soft-skills-s2976   ./pages/1754636845.html , FrequentWord ->team, Count : 107
 Url is : https://www.linkedin.com/pulse/topics/home   ./pages/1754636848.html , FrequentWord ->contributions, Count : 97
+Url is : https://www.newindianexpress.com/magazine/2017/nov/18/sultans--of-skill-1703090.html   ./pages/1754889094.html , FrequentWord ->null, Count : 918
+Url is : https://www.newindianexpress.com/magazine/2017/nov/18/sultans--of-skill-1703090.html   ./pages/1754889347.html , FrequentWord ->id, Count : 828
+Url is : https://www.newindianexpress.com/magazine/2017/nov/18/sultans--of-skill-1703090.html   ./pages/1754889421.html , FrequentWord ->id, Count : 828
+Url is : https://www.newindianexpress.com/magazine/2017/nov/18/sultans--of-skill-1703090.html   ./pages/1754889544.html , FrequentWord ->id, Count : 828
+Url is : https://www.newindianexpress.com/magazine/2017/nov/18/sultans--of-skill-1703090.html   ./pages/1754889839.html , FrequentWord ->id, Count : 828
+Url is : https://www.newindianexpress.com/magazine/2017/nov/18/sultans--of-skill-1703090.html   ./pages/1754890273.html , FrequentWord ->id, Count : 828
+Url is : https://www.newindianexpress.com/magazine/2017/nov/18/sultans--of-skill-1703090.html   ./pages/1754891001.html , FrequentWord ->id, Count : 1203
+Url is : https://www.newindianexpress.com/magazine/2017/nov/18/sultans--of-skill-1703090.html   ./pages/1754891915.html , FrequentWord ->solid, Count : 82
+Url is : https://www.newindianexpress.com/magazine/2017/nov/18/sultans--of-skill-1703090.html   ./pages/1754892866.html , FrequentWord ->students, Count : 20
+Url is : https://www.linkedin.com/feed/update/urn:li:activity:7326883592423329792   ./pages/1754895009.html , FrequentWord ->codequotient, Count : 10

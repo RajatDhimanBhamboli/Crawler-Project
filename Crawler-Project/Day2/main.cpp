@@ -32,8 +32,9 @@ int main(int argc,char* argv[]){
 
     // char *allhtmldata=obj->readfile(filepath);
     // cout<<allhtmldata;
-
-    obj->recursiveCrawler(url,dirctorypath,depth);
+char url1[100]={"https://www.linkedin.com/feed/update/urn:li:activity:7326883592423329792"};
+    char directorypath[100] = "./pages";
+    obj->recursiveCrawler(url1,directorypath,1);
     // startCrawler(filepath,)
     
 }

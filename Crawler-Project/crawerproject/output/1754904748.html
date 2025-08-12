@@ -1,0 +1,1438 @@
+<!DOCTYPE html><html lang="en"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<head>
+
+<link rel="stylesheet" title="full view" href="thesis.css" media="screen" type="text/css" />
+<link rel="stylesheet" media="print" href="errata.css" type="text/css" />
+<link rel="alternate stylesheet" title="outline view" href="outline.css" type="text/css" />
+
+<!--[if lt IE 7]>
+<style type="text/css" media="screen">
+/* courtesy of Gabriele Romanato */
+html, body { height: 100%; overflow-y: hidden }
+#scroll { height: 100%; width: 100%;  overflow: auto; overflow-x: hidden; font-size: 100% }
+</style>
+<![endif]-->
+
+
+<title>PhD Thesis: Cascading Style Sheets</title>
+</head>
+<body>
+
+<div class="menu" id="menu">
+
+<p><em><a href="http://gabrieleromanato.altervista.org/css/lie/tesi/">Italian translation</a></em></p>
+<p><em><a href="defense.html">Lecture transcriptions</a></em></p>
+<p><em><a href="css.pdf">PDF version</a></em></p>
+
+<p><em>Thesis contents:</em></p>
+
+<ul>
+
+<li><a href="#title">Title</a></li>
+
+<li><a href="#abstract">Abstract</a></li>
+
+<li><a href="#inspiration">Inspiration</a></li>
+
+<li><a href="#toc">Table of contents</a></li>
+
+<li><a href="#lof">List of figures</a></li>
+
+<li><a href="#lot">List of tables</a></li>
+
+<li><a href="#acknowledgements">Acknowledgements</a></li>
+
+<li><a href="#overview">Overview and summary</a></li>
+
+<li><a href="#ch-introduction">Introduction</a></li>
+
+<li><a href="#ch-structure">Structured documents</a></li>
+
+<li><a href="#ch-preweb">Style sheets prior to the web</a></li>
+
+<li><a href="#ch-postweb">Style sheet proposals for the web</a></li>
+
+<li><a href="#ch-webreq">Web requirements</a></li>
+
+<li><a href="#ch-css">Cascading Style Sheets</a></li>
+
+<li><a href="#ch-problems">Problems in CSS</a></li>
+
+<li><a href="#ch-ssr">CSS for small screens</a></li>
+
+<li><a href="#ch-clink">Cascading links</a></li>
+
+<li><a href="#ch-future">Future research</a></li>
+
+<li><a href="#ch-conclusion">Conclusions</a></li>
+
+<li><a href="#ch-terminology">Glossary</a></li>
+
+<li><a href="#ch-references">References</a></li>
+
+<li><a href="#colophon">Colophon</a></li>
+
+</ul>
+</div>
+
+<div id="scroll"> <!-- errata: added element -->
+<div class="titlepage" id="title"> <!-- errata: added id attribute -->
+
+<h1 class="title">Cascading Style Sheets</h1>
+
+<h2>H&aring;kon Wium Lie</h2>
+
+
+<img alt="Universtity of Oslo's logo" id="logo" src="i/uio-logo-l.png" />
+
+<div class="bottom"><p>Thesis submitted for the degree of Doctor Philosophi&#x153;<!--Doctor Philosophiae--><br/>Faculty of Mathematics and Natural Sciences<br/>University of Oslo<br/>Norway<br/>2005</p>
+
+</div>
+</div>
+
+
+<div class="imprint">
+
+<p>&copy; H&aring;kon Wium Lie, 1994-2005</p>
+
+<p>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/2.5/">Creative Commons Attribution-NonCommercial 2.5 License</a>.</p>
+
+
+<p>Submitted 29th of March, 2005, as partial fulfillment of the degree<br />
+Doctor Philosophi&#x153;<!--Doctor Philosophiae--><br />
+At the Faculty of Mathematics and Natural Sciences<br />
+University of Oslo<br />
+Norway</p>
+
+
+<p>Series of dissertations submitted to the Faculty of Mathematics and Natural Sciences, University of Oslo.<br/>
+No. 498</p>
+
+<p>ISSN 1501-7710</p>
+
+<div class="bottom print-only">
+<p>Cover: Inger Sandved Anfinsen.<br/>
+Printed in Norway: AiT e-dit AS, Oslo, 2006.</p>
+
+<p>Produced in co-operation with Unipub AS.
+The thesis is produced by Unipub AS merely in connection with the 
+thesis defence. Kindly direct all inquiries regarding the thesis to the copyright holder or the unit which grants the doctorate.</p>
+
+<p>Unipub AS is owned by The University Foundation for Student Life (SiO)</p>
+
+</div>
+
+</div>
+
+<div class="abstract" id="abstract">
+<h1 class="uchapter" id="h-4">Abstract</h1>
+
+<p>The topic of this thesis is style sheet languages for structured documents on the web. Due to characteristics of the web &ndash; including a screen-centric publishing model, a multitude of output devices, uncertain delivery, strong user preferences, and the possibility for later binding between content and style &ndash; the hypothesis is that the web calls for different style sheet languages than does traditional electronic publishing.</p>
+
+<p>Style sheet languages that were developed and used prior to the web are analyzed and compared with style sheet proposals for the web between 1993-1996. The dissertation describes the design of a web-centric style sheet language known as Cascading Style Sheets (CSS). CSS has several notable features including: cascading, pseudo-classes and pseudo-elements, forward-compatible parsing rules, support for different media types, and a strong emphasis on selectors. Problems in CSS are analyzed, and recommended future research is described.</p>
+</div>
+
+<div class="dedication" id="inspiration">
+<h1 class="uchapter" id="h-5">Inspiration</h1>
+
+<blockquote>Style sheets constitute a wormhole into unspeakable universes.
+<cite class="author">&#8211;James D Mason, 1994</cite></blockquote>
+
+<blockquote>Style sheet languages are terribly underresearched.
+<cite class="author">&#8211;Philip M Marden, Ethan V Munson, 1999</cite></blockquote>
+
+<blockquote>In which form are you planning to publish the first edition of the Parsifal poem? Even if I like Latin letters, I'm afraid they are unpopular (especially among publishers). So, if the letters will be German, please make the type large and of good quality. The legibility of a text is very important to me.
+<cite class="author">&#8211;Richard Wagner, in a letter to his publisher Ludwig Strecker</cite></blockquote>
+
+
+
+</div>
+
+
+<div class="toc" id="toc">
+<h1 class="uchapter" id="h-7">Table of contents</h1>
+
+<ul class="toc">
+<li class="rchapter"><a href="#h-4">Abstract</a></li>
+
+<li class="rchapter"><a href="#h-5">Inspiration</a></li>
+
+<li class="rchapter"><a href="#h-7">Table of contents</a></li>
+
+<li class="rchapter"><a href="#h-8">List of figures</a></li>
+
+<li class="rchapter"><a href="#h-9">List of tables</a></li>
+
+<li class="rchapter"><a href="#h-6">Acknowledgements</a></li>
+
+<li class="rchapter"><a href="#h-10">Overview and summary of the thesis</a></li>
+
+<li class="chapter"><a href="#h-24">Introduction</a> 
+
+<ul>
+<li><a href="#h-25">Structure versus presentation</a> 
+
+<ul>
+<li><a href="#h-26">Abstraction levels</a></li>
+
+<li><a href="#h-27">Presentational HTML</a></li>
+
+</ul>
+</li>
+
+<li><a href="#h-28">Style sheets</a> 
+
+<ul>
+<li><a href="#h-29">WYSIWYG &ndash; a competing model</a></li>
+
+<li><a href="#h-30">Web characteristics</a></li>
+
+<li><a href="#h-32">Style sheet mechanisms for the web</a></li>
+
+</ul>
+</li>
+
+<li><a href="#h-33">CSS</a> 
+
+<ul>
+<li><a href="#h-34">The CSS development</a></li>
+
+</ul>
+</li>
+
+<li><a href="#h-35">Summary and conclusions</a></li>
+
+</ul>
+</li>
+
+<li class="chapter"><a href="#h-36">Structured documents</a> 
+
+<ul>
+<li><a href="#h-37">Abstraction levels</a></li>
+
+<li><a href="#h-38">Structured document systems</a> 
+
+<ul>
+<li><a href="#h-39">Scribe</a> 
+
+<ul>
+<li><a href="#h-40">A simple document</a></li>
+
+<li><a href="#h-41">Document types</a></li>
+
+<li><a href="#h-42">Scribe commands</a></li>
+
+<li><a href="#h-43">Formatting environments</a></li>
+
+<li><a href="#h-44">Changing and adding environments</a></li>
+
+<li><a href="#h-45">Scribe in context</a></li>
+
+</ul>
+</li>
+
+<li><a href="#h-46">LaTeX</a></li>
+
+<li><a href="#h-47">Open Document Architecture (ODA)</a></li>
+
+<li><a href="#h-48">Standard Generalized Markup Language (SGML)</a> 
+
+<ul>
+<li><a href="#h-49">Document Type Definition (DTD)</a></li>
+
+<li><a href="#h-50">Processing Instructions</a></li>
+
+<li><a href="#h-51">LINK</a></li>
+
+<li><a href="#h-52">SGML in context</a></li>
+
+</ul>
+</li>
+
+<li><a href="#h-53">HyperText Markup Language (HTML)</a> 
+
+<ul>
+<li><a href="#h-54">HTML's original design</a></li>
+
+<li><a href="#h-55">Structure versus style</a></li>
+
+<li><a href="#h-56">HTML and SGML</a></li>
+
+<li><a href="#h-57">HTML+ and HTML3</a></li>
+
+<li><a href="#h-58">HTML 3.2</a></li>
+
+<li><a href="#h-59">HTML 4</a></li>
+
+<li><a href="#h-60">HTML in context</a></li>
+
+</ul>
+</li>
+
+<li><a href="#h-61">XML</a> 
+
+<ul>
+<li><a href="#h-62">The SGML Working Group charter</a></li>
+
+<li><a href="#h-63">The XML specification</a></li>
+
+<li><a href="#h-64">XML and style sheets</a></li>
+
+<li><a href="#h-65">XML in context</a></li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+<li><a href="#h-66">The role of transformation languages</a> 
+
+<ul>
+<li><a href="#h-67">Adorning the tree</a></li>
+
+<li><a href="#h-69">Transforming the tree</a></li>
+
+<li><a href="#h-70">Formatting objects</a></li>
+
+<li><a href="#h-71">Retaining both semantics and presentation</a></li>
+
+<li><a href="#h-72">Style versus transformation</a></li>
+
+</ul>
+</li>
+
+<li><a href="#h-73">Summary and conclusions</a></li>
+
+</ul>
+</li>
+
+<li class="chapter"><a href="#h-74">Style sheets prior to the web</a> 
+
+<ul>
+<li><a href="#h-75">Components of a style sheet language</a></li>
+
+<li><a href="#h-76">Formatting Output Specification Instance (FOSI)</a> 
+
+<ul>
+<li><a href="#h-77">Syntax</a></li>
+
+<li><a href="#h-78">Selectors</a></li>
+
+<li><a href="#h-79">Properties</a></li>
+
+<li><a href="#h-81">Values and units</a></li>
+
+<li><a href="#h-82">Value propagation</a></li>
+
+<li><a href="#h-83">Visual formatting model</a></li>
+
+<li><a href="#h-84">Linking mechanism</a></li>
+
+<li><a href="#h-85">Generated content</a></li>
+
+<li><a href="#h-86">Other formatting contexts</a></li>
+
+<li><a href="#h-87">FOSI in context</a></li>
+
+</ul>
+</li>
+
+<li><a href="#h-88">DSSSL</a> 
+
+<ul>
+<li><a href="#h-89">Syntax</a></li>
+
+<li><a href="#h-90">Selectors</a> 
+
+<ul>
+<li><a href="#h-91">Element construction rule</a></li>
+
+<li><a href="#h-92">Root construction rule</a></li>
+
+<li><a href="#h-93">Default construction rule</a></li>
+
+<li><a href="#h-94">Query construction rule</a></li>
+
+<li><a href="#h-95">ID construction rule</a></li>
+
+</ul>
+</li>
+
+<li><a href="#h-96">Properties</a></li>
+
+<li><a href="#h-97">Values and units</a></li>
+
+<li><a href="#h-98">Value propagation</a></li>
+
+<li><a href="#h-99">Visual formatting model</a> 
+
+<ul>
+<li><a href="#h-100">Flow objects</a></li>
+
+<li><a href="#h-101">Areas</a></li>
+
+</ul>
+</li>
+
+<li><a href="#h-103">Linking mechanism</a></li>
+
+<li><a href="#h-104">Generated content</a></li>
+
+<li><a href="#h-105">Other formatting contexts</a></li>
+
+<li><a href="#h-106">DSSSL in context</a></li>
+
+</ul>
+</li>
+
+<li><a href="#h-107">P94</a> 
+
+<ul>
+<li><a href="#h-108">Syntax</a></li>
+
+<li><a href="#h-109">Selectors</a></li>
+
+<li><a href="#h-111">Properties</a></li>
+
+<li><a href="#h-112">Values and units</a> 
+
+<ul>
+<li><a href="#h-113">Length units</a></li>
+
+<li><a href="#h-116">Constraints</a></li>
+
+<li><a href="#h-118">Elastic values</a></li>
+
+</ul>
+</li>
+
+<li><a href="#h-119">Value propagation</a></li>
+
+<li><a href="#h-120">Visual formatting model</a></li>
+
+<li><a href="#h-121">Linking mechanism</a></li>
+
+<li><a href="#h-122">Generated content</a></li>
+
+<li><a href="#h-124">Other formatting contexts</a> 
+
+<ul>
+<li><a href="#h-125">Views</a></li>
+
+</ul>
+</li>
+
+<li><a href="#h-127">P94 in context</a></li>
+
+</ul>
+</li>
+
+<li><a href="#h-128">Summary and conclusions</a></li>
+
+</ul>
+</li>
+
+<li class="chapter"><a href="#h-130">Style sheet proposals for the web</a> 
+
+<ul>
+<li><a href="#h-131">Robert Raisch's proposal (RRP)</a> 
+
+<ul>
+<li><a href="#h-132">Syntax</a></li>
+
+<li><a href="#h-133">Selectors</a></li>
+
+<li><a href="#h-134">Properties</a></li>
+
+<li><a href="#h-135">Values and units</a></li>
+
+<li><a href="#h-136">Value propagation</a></li>
+
+<li><a href="#h-137">Visual formatting model</a></li>
+
+<li><a href="#h-138">Linking mechanism</a></li>
+
+<li><a href="#h-139">Generated content</a></li>
+
+<li><a href="#h-140">Other formatting contexts</a></li>
+
+<li><a href="#h-141">RRP in context</a></li>
+
+</ul>
+</li>
+
+<li><a href="#h-142">Pei Wei's proposal (PWP)</a> 
+
+<ul>
+<li><a href="#h-143">Syntax</a></li>
+
+<li><a href="#h-144">Selectors</a></li>
+
+<li><a href="#h-145">Properties</a></li>
+
+<li><a href="#h-146">Values and units</a></li>
+
+<li><a href="#h-147">Value propagation</a></li>
+
+<li><a href="#h-148">Visual formatting model</a></li>
+
+<li><a href="#h-149">Linking mechanism</a></li>
+
+<li><a href="#h-150">Generated content</a></li>
+
+<li><a href="#h-151">Other formatting contexts</a></li>
+
+<li><a href="#h-152">PWP in context</a></li>
+
+</ul>
+</li>
+
+<li><a href="#h-153">Steve Heaney's proposal (SHP)</a> 
+
+<ul>
+<li><a href="#h-154">Syntax</a></li>
+
+<li><a href="#h-155">Selectors</a></li>
+
+<li><a href="#h-156">Properties</a></li>
+
+<li><a href="#h-157">Values and units</a></li>
+
+<li><a href="#h-158">Value propagation</a></li>
+
+<li><a href="#h-159">Visual formatting model</a></li>
+
+<li><a href="#h-160">Linking mechanism</a></li>
+
+<li><a href="#h-161">Generated content</a></li>
+
+<li><a href="#h-162">Other formatting contexts</a></li>
+
+<li><a href="#h-163">SHP in context</a></li>
+
+</ul>
+</li>
+
+<li><a href="#h-164">Cascading HTML Style Sheets (CHSS)</a> 
+
+<ul>
+<li><a href="#h-165">Syntax</a></li>
+
+<li><a href="#h-168">Selectors</a></li>
+
+<li><a href="#h-170">Properties</a></li>
+
+<li><a href="#h-171">Values and units</a> 
+
+<ul>
+<li><a href="#h-172">Expressions</a></li>
+
+<li><a href="#h-174">Blending values</a></li>
+
+</ul>
+</li>
+
+<li><a href="#h-176">Value propagation</a></li>
+
+<li><a href="#h-177">Visual formatting model</a></li>
+
+<li><a href="#h-178">Linking mechanism</a></li>
+
+<li><a href="#h-179">Generated content</a></li>
+
+<li><a href="#h-180">Other formatting contexts</a></li>
+
+<li><a href="#h-181">CHSS in context</a></li>
+
+</ul>
+</li>
+
+<li><a href="#h-182">Joe English's proposal (JEP)</a> 
+
+<ul>
+<li><a href="#h-183">Syntax</a></li>
+
+<li><a href="#h-184">Selectors</a></li>
+
+<li><a href="#h-185">Properties</a></li>
+
+<li><a href="#h-186">Values and units</a> 
+
+<ul>
+<li><a href="#h-187">Length values</a></li>
+
+<li><a href="#h-188">Color values</a></li>
+
+<li><a href="#h-189">Images</a></li>
+
+<li><a href="#h-190">Keyword values</a></li>
+
+</ul>
+</li>
+
+<li><a href="#h-191">Value propagation</a> 
+
+<ul>
+<li><a href="#h-192">Inheritance</a></li>
+
+<li><a href="#h-193">Cascading</a></li>
+
+</ul>
+</li>
+
+<li><a href="#h-194">Visual formatting model</a></li>
+
+<li><a href="#h-195">Linking mechanism</a></li>
+
+<li><a href="#h-196">Generated content</a></li>
+
+<li><a href="#h-197">Other formatting contexts</a></li>
+
+<li><a href="#h-198">JEP in context</a></li>
+
+</ul>
+</li>
+
+<li><a href="#h-199">Sketch of Simple Formatting Primitives (SSFP)</a> 
+
+<ul>
+<li><a href="#h-200">Syntax</a></li>
+
+<li><a href="#h-201">Selectors</a></li>
+
+<li><a href="#h-202">Properties</a></li>
+
+<li><a href="#h-203">Values and units</a></li>
+
+<li><a href="#h-204">Value propagation</a></li>
+
+<li><a href="#h-205">Visual formatting model</a></li>
+
+<li><a href="#h-206">Linking mechanism</a></li>
+
+<li><a href="#h-207">Generated content</a></li>
+
+<li><a href="#h-208">Other formatting contexts</a></li>
+
+<li><a href="#h-209">SSFP in context</a></li>
+
+</ul>
+</li>
+
+<li><a href="#h-210">DSSSL Lite</a> 
+
+<ul>
+<li><a href="#h-211">Syntax</a></li>
+
+<li><a href="#h-212">Selectors</a></li>
+
+<li><a href="#h-213">Properties</a></li>
+
+<li><a href="#h-214">Values and units</a></li>
+
+<li><a href="#h-215">Value propagation</a></li>
+
+<li><a href="#h-216">Visual formatting model</a></li>
+
+<li><a href="#h-217">Linking mechanism</a></li>
+
+<li><a href="#h-217b">Generated content</a></li>
+
+<li><a href="#h-218">Other formatting contexts</a></li>
+
+<li><a href="#h-219">DSSSL Lite in context</a></li>
+
+</ul>
+</li>
+
+<li><a href="#h-231">Stream-based style sheet proposal (SSP)</a> 
+
+<ul>
+<li><a href="#h-232">Syntax</a></li>
+
+<li><a href="#h-233">Selectors</a></li>
+
+<li><a href="#h-234">Properties</a></li>
+
+<li><a href="#h-235">Values and units</a> 
+
+<ul>
+<li><a href="#h-236">Attribute references</a></li>
+
+<li><a href="#h-237">Property references</a></li>
+
+<li><a href="#h-238">Built-in functions</a></li>
+
+</ul>
+</li>
+
+<li><a href="#h-239">Value propagation</a></li>
+
+<li><a href="#h-240">Visual formatting model</a></li>
+
+<li><a href="#h-241">Linking mechanism</a></li>
+
+<li><a href="#h-242">Generated content</a></li>
+
+<li><a href="#h-243">Other formatting contexts</a></li>
+
+<li><a href="#h-244">SSP in context</a></li>
+
+</ul>
+</li>
+
+<li><a href="#h-245">PSL96</a> 
+
+<ul>
+<li><a href="#h-246">Syntax</a></li>
+
+<li><a href="#h-248">Selectors</a></li>
+
+<li><a href="#h-249">Properties</a></li>
+
+<li><a href="#h-250">Values and units</a> 
+
+<ul>
+<li><a href="#h-252">Expressions</a></li>
+
+<li><a href="#h-253">Specified versus actual values</a></li>
+
+</ul>
+</li>
+
+<li><a href="#h-254">Value propagation</a></li>
+
+<li><a href="#h-255">Visual formatting model</a></li>
+
+<li><a href="#h-256">Linking mechanism</a></li>
+
+<li><a href="#h-257">Generated content</a></li>
+
+<li><a href="#h-258">Other formatting contexts</a></li>
+
+<li><a href="#h-259">PSL96 in context</a></li>
+
+</ul>
+</li>
+
+<li><a href="#h-260">Summary and conclusions</a></li>
+
+</ul>
+</li>
+
+<li class="chapter"><a href="#h-272">Web requirements</a> 
+
+<ul>
+<li><a href="#h-272b">Web characteristics formulated as requirements</a></li>
+
+<li><a href="#h-273">Summary and conclusions</a></li>
+
+</ul>
+</li>
+
+<li class="chapter"><a href="#h-274">Cascading Style Sheets</a> 
+
+<ul>
+<li><a href="#h-275">Syntax</a> 
+
+<ul>
+<li><a href="#h-278">Forward-compatible parsing</a></li>
+
+<li><a href="#h-279">At-keywords</a></li>
+
+</ul>
+</li>
+
+<li><a href="#h-280">Selectors</a> 
+
+<ul>
+<li><a href="#h-281">Simple and contextual selectors</a></li>
+
+<li><a href="#h-282">Pseudo-elements and pseudo-classes</a></li>
+
+<li><a href="#h-283">Selectors in CSS1</a></li>
+
+<li><a href="#h-284">Selectors in CSS2</a></li>
+
+</ul>
+</li>
+
+<li><a href="#h-285">Properties</a></li>
+
+<li><a href="#h-286">Values and units</a> 
+
+<ul>
+<li><a href="#h-287">Length units</a></li>
+
+</ul>
+</li>
+
+<li><a href="#h-288">Value propagation</a> 
+
+<ul>
+<li><a href="#h-289">Cascading</a> 
+
+<ul>
+<li><a href="#h-290">The basic cascading mechanism</a></li>
+
+<li><a href="#h-295">Multiple sources: User versus author style sheets</a></li>
+
+<li><a href="#h-297">Combining partial style sheets with the browser's default style sheet</a></li>
+
+</ul>
+</li>
+
+<li><a href="#h-299">Inheritance</a></li>
+
+<li><a href="#h-300">Initial value</a></li>
+
+</ul>
+</li>
+
+<li><a href="#h-301">Visual formatting model</a> 
+
+<ul>
+<li><a href="#h-302">Creating boxes from elements</a></li>
+
+<li><a href="#h-303">The box model</a> 
+
+<ul>
+<li><a href="#h-305">Basic boxes: block and inline</a></li>
+
+<li><a href="#h-306">Outside-in versus inside-out formatting</a></li>
+
+</ul>
+</li>
+
+<li><a href="#h-308">Beyond the basic box model</a></li>
+
+<li><a href="#h-309">Inspiration from other formatting models</a></li>
+
+</ul>
+</li>
+
+<li><a href="#h-314">Linking mechanism</a></li>
+
+<li><a href="#h-315">Generated content</a> 
+
+<ul>
+<li><a href="#h-317">Counters</a></li>
+
+</ul>
+</li>
+
+<li><a href="#h-319">Other formatting contexts</a> 
+
+<ul>
+<li><a href="#h-320">Media types</a></li>
+
+</ul>
+</li>
+
+<li><a href="#h-321">CSS in context</a></li>
+
+<li><a href="#h-322">Summary and conclusions</a></li>
+
+</ul>
+</li>
+
+<li class="chapter"><a href="#h-323">Problems in CSS</a> 
+
+<ul>
+<li><a href="#h-324">Errors in the specifications</a></li>
+
+<li><a href="#h-325">Problems with the specifications</a> 
+
+<ul>
+<li><a href="#h-326">Missing functionality</a></li>
+
+<li><a href="#h-327">Excessive functionality</a></li>
+
+<li><a href="#h-328">Poor design</a> 
+
+<ul>
+<li><a href="#h-329">Overloaded properties</a></li>
+
+<li><a href="#h-330">Positioning</a></li>
+
+<li><a href="#h-331">XML syntax</a></li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+<li><a href="#h-334">Cascading problems</a> 
+
+<ul>
+<li><a href="#h-335">Self-inflicted problems</a></li>
+
+<li><a href="#h-336">Problems resulting from markup</a></li>
+
+<li><a href="#h-337">User interface problems</a></li>
+
+<li><a href="#h-338">Complexity problems</a></li>
+
+</ul>
+</li>
+
+<li><a href="#h-339">Problems in implementations</a></li>
+
+<li><a href="#h-340">Summary and conclusions</a></li>
+
+</ul>
+</li>
+
+<li class="chapter"><a href="#h-342">CSS for small screens</a> 
+
+<ul>
+<li><a href="#h-343">The problem</a> 
+
+<ul>
+<li><a href="#h-344">Cascading</a></li>
+
+<li><a href="#h-345">Linearization</a></li>
+
+<li><a href="#h-346">Element removal</a></li>
+
+<li><a href="#h-347">Element resizing</a></li>
+
+</ul>
+</li>
+
+<li><a href="#h-348">Summary and conclusions</a></li>
+
+</ul>
+</li>
+
+<li class="chapter"><a href="#h-349">Cascading links</a> 
+
+<ul>
+<li><a href="#h-349b">Background</a></li>
+
+<li><a href="#h-349c">Background</a></li>
+
+<li><a href="#h-350">Making hyperlinks</a></li>
+
+<li><a href="#h-351">Replaced elements</a></li>
+
+<li><a href="#h-353">Summary and conclusions</a></li>
+
+</ul>
+</li>
+
+<li class="chapter"><a href="#h-354">Future research</a> 
+
+<ul>
+<li><a href="#h-355">Summary and conclusions</a></li>
+
+</ul>
+</li>
+
+<li class="uchapter"><a href="#h-356">Conclusions</a></li>
+
+<li class="uchapter"><a href="#h-357">Glossary</a></li>
+
+<li class="uchapter"><a href="#h-358">References</a></li>
+
+<li class="uchapter"><a href="#h-359">Colophon</a></li>
+
+</ul>
+</div>
+
+<div class="lot" id="lof">
+<h1 class="uchapter" id="h-8">List of figures</h1>
+
+<ol>
+<li><a href="#f-1">The abstraction ladder.</a></li>
+
+<li><a href="#f-2">Inheritance and defaulting flow chart in FOSI.</a></li>
+
+<li><a href="#f-3">The PWP sample document rendered in Viola.</a></li>
+
+<li><a href="#f-4">The CSS box model.</a></li>
+
+<li><a href="#f-5">Two different counter styles.</a></li>
+
+</ol>
+</div>
+
+<div class="lot" id="lot">
+<h1 class="uchapter" id="h-9">List of tables</h1>
+
+<ol>
+<li><a href="#t-1">A comparison of document formats on the ladder of abstraction.</a></li>
+
+<li><a href="#t-2">The ambitions and achievements of the six different structured&nbsp;document&nbsp;systems.</a></li>
+
+<li><a href="#t-3">Common environments offered in Scribe.</a></li>
+
+<li><a href="#t-4">FOSI's categories.</a></li>
+
+<li><a href="#t-5">DSSSL's flow objects and associated properties.</a></li>
+
+<li><a href="#t-6">Properties of P94.</a></li>
+
+<li><a href="#t-7">RRP's catetories and properties.</a></li>
+
+<li><a href="#t-8">A comparison of categories in FOSI and RRP.</a></li>
+
+<li><a href="#t-9">A comparison of the font category in RRP and FOSI.</a></li>
+
+<li><a href="#t-10">JEP's properties.</a></li>
+
+<li><a href="#t-11">Categories in JEP.</a></li>
+
+<li><a href="#t-12">SSFP's properties along with CSS equivalents.</a></li>
+
+<li><a href="#t-13">The properties of DSSSL Lite.</a></li>
+
+<li><a href="#t-14">The number of flow object classes and properties in DSSSL Lite, DSSSL-O&nbsp;and&nbsp;DSSSL.</a></li>
+
+<li><a href="#t-15">Properties proposed by SSP.</a></li>
+
+<li><a href="#t-16">An evaluation of how different style sheet languages and proposals&nbsp;perform&nbsp;with&nbsp;respect to web requirements.</a></li>
+
+<li><a href="#t-17">Selectors in CSS1.</a></li>
+
+<li><a href="#t-18">Selectors added in CSS2.</a></li>
+
+<li><a href="#t-19">Properties in CSS1.</a></li>
+
+<li><a href="#t-20">Properties introduced in CSS2.</a></li>
+
+<li><a href="#t-21">CSS evaluated with respect to the web requirements.</a></li>
+
+</ol>
+</div>
+
+
+<div class="foreword" id="acknowledgements">
+<h1 class="uchapter" id="h-6">Acknowledgements</h1>
+
+<p>Having glanced through a fair number of doctoral dissertations myself, I believe the acknowledgements to be one of the most widely read sections. It is where the author, for a brief moment, can stray from the dryness of academic writing to express years of accumulated frustration and gratitude. Having worked on Cascading Style Sheets (CSS) for a decade, I have had my fair share of both frustration and gratitude. I'll try to express the latter in words while the frustration will be left to the <a href="#leading" class="term">leading</a>.<span class="fn">Terms in bold are explained in the <a href="#ch-terminology" class="addpage">Glossary</a>.</span></p>
+
+<p>My gratitude goes first and foremost to my parents, Sissel and Alfred Lie. My father set a fine academic example by getting his PhD at the age of 50 and the fact that I'm beating him by a decade or so is a complement to him rather than to me. My mother's love of publications and her extensive information filing system have also contributed to my own urge to get my notes into order. I hereby pass the challenge of beating their father to a PhD onto my own children. Or, at least, to get their notes in order.</p>
+
+<p>Two very special people deserve particular mention and thanks; without them, this thesis would not exist. Bert Bos joined me at a point when CSS had been named and waved, but was still a set of immature ideas rather than a coherent specification. During some short weeks around a white-board in the summer of 1995, CSS was hammered out. I will remember that time in Sophia-Antipolis as some of best days and nights of my life. Karen Mosman is my publisher, muse and partner. Her enduring loyalty to my writing and to my person has changed both for the better. My writing and my person, that is; Karen herself is practically perfect.</p>
+
+<p>The World Wide Web Consortium (W3C) has been a good home for CSS. I thank Tim Berners-Lee and Jean-Francois Abramatic for setting up the organizational structures necessary to make it happen. Tim also gets very special thanks for inventing the web, not patenting it, and leaving a stylistic gap to filled. Among my W3C colleagues who were instrumental in supporting the work in the early days are Dave Raggett and Dan Connolly. Dave's browser, later named Arena, provided the perfect testing ground for CSS. Dan &#8211; after some healthy initial resistance &#8211; supported me when presenting CSS to the W3C HTML Editorial Review Board (ERB) which he co-chaired with Dave.</p>
+
+<p>One small anecdote from the ERB meeting in April 1996 is worth recounting. Since I was there primarily to present CSS rather than take part in HTML discussions, I was given the task of taking minutes. It so happened that the name of the next HTML version  was decided in this meeting. I hope I will be forgiven for disclosing an (anonymized) excerpt from the minutes:</p>
+
+<blockquote>
+<pre>The naming issue was raised, and the meeting switched 
+into brainstorm mode. Suggestions fell into three groups:
+ - version numbers: 3.1, 3.2, 3.5, 4.0
+ - code names: Wilbur, Classic HTML, Unified HTML, 
+   Common HTML, W3C HTML
+ - compounds: HTML96, W3C HTML4
+In the end, people preferred version numbers. <em>NN</em> 
+argued that Wilbur was a major change that deserved a new 
+major number: 4.0. Other people didn't like the zero in 
+that name. "HTML 3.2" was selected after discussions and 
+votes.
+</pre>
+</blockquote>
+
+<p>So, somewhat by accident, I was the first person to type the now ubiquitous string <q>HTML 3.2</q> into a computer. A few small key strokes for a man, a giant leap for the web.</p>
+
+<p>Inside W3C, the CSS Working Group has been the keeper of the flame. Some highly intelligent and dedicated people joined the group over the years. I would especially like to thank Ian Hickson, David Baron, Tantek Çelik, Daniel Glazman and Eric Meyer. Additionally, Steven Pemberton chaired the first W3C Workshop on Style Sheets, Chris Lilley served as chair for many years, and Ian Jacobs contributed his editorial skills. I am grateful to all of you.</p>
+
+<p>In 1999, when CSS1 and CSS2 had been written, I joined Opera Software to ensure that the specifications were implemented correctly by at least one browser. Thanks go to Jon von Tetzchner and Geir Ivarsøy for founding a company worth working for. Geir, along with Karl Anders Øygard, is also the mastermind behind Opera's display engine that makes CSS shine on screens of all sizes. Thanks also go to Snorre Grimsby, Rijk van Geijtenbeek, Brian Wilson and Sue Sims for supporting CSS internally and externally.</p>
+
+<p>Many people have been helpful while writing this thesis. I am indebted to Paul Grosso, Vincent Quint, Pamela Gennusa, Ethan Munson, Joe English, Harvey Bingham, Paul Prescod, Jany Quintard, Yann Dirson, Dave Pawson, Ian Castle, Didier P. H. Martin, Geir Ove Grønmo and Bette Harvey for answering my many questions about the past. I am grateful to Joe English, Wayne Gramlich, James Mason, Jeff Moore and Dan Connolly for allowing me to quote from their unpublished writings. Gunilla Petersén of the Royal Swedish Opera directed me to the inspirational Wagner quote.</p>
+
+<p>This thesis concerns style sheet proposals for the web. I am grateful to the authors of the proposals for contributing a very interesting topic of research. Having analyzed their proposals without having access to their minds, I may have misunderstood or misinterpreted their work. If so, please contact me. Thanks also go to the participants on the www-talk, www-html and www-style mailing lists. Without the communities that formed on the mailing lists, the web would not have existed as we know it today.</p>
+
+<p>CSS has borrowed many ideas from the MIT Media Lab where I spent two forming years. Thanks to Walter Bender and Andy Lippman for exposing me to those ideas. At the University of Oslo, Ole Hanseth and Gisle Hannemyr have motivated me to write up my notes into a thesis, and advised me on how this should be done. Without them, my notes would still be scattered around.</p>
+
+<p>I am grateful to Anthea Vaughan for patiently copy-editing my drafts.</p>
+
+<p>I would like to thank the people who created <em class="product">FrameMaker</em>, <em class="product">GNU-emacs</em>, and the <em class="product">Prince</em> formatter. FrameMaker taught me typography, GNU-emacs gracefully accepted all my handcrafted tags, and Prince put this thesis onto paper.</p>
+
+<p class="author">Oslo, March 2005<br />
+H&aring;kon Wium Lie</p>
+</div>
+
+
+<div class="uchapter" id="overview">
+
+<h1 class="uchapter" id="h-10">Overview and summary of the thesis</h1>
+
+<p>The topic of this thesis is style sheet languages for structured documents on the web. The hypothesis is that the web calls for different style sheet languages than does traditional electronic publishing. Further, the design of a style sheet language that fulfills the specific requirements of the web, namely Cascading Style Sheets, is described. The thesis can be divided into a <em>why</em> part (Chapter 1-5), a <em>how</em> part (Chapter 6-9), and where to go from here (Chapter 10).</p>
+
+<h3 id="h-11"><a href="#ch-introduction">Chapter 1: Introduction</a></h3>
+
+<p>The first chapter is an introduction to the the topic of the thesis and related subjects. The historical context in which CSS was developed is described, including the development of HTML from its roots in structured documents to the presentational <a href="#tag" class="term">tags</a> introduced by various <a href="#browser" class="term">browsers</a>. Key concepts such as <a href="#structured_document" class="term">structured documents</a>, <a href="#style_sheet" class="term">style sheets</a> and <a href="#cascading" class="term">cascading</a> are introduced.</p>
+
+<h3 id="h-12"><a href="#ch-structure">Chapter 2: Structured documents</a></h3>
+
+<p>Style sheet languages and structured documents are mutually dependent. Without style sheets, structured documents cannot be presented, and without structured documents there is nothing for style sheets to present. Chapter 2 starts by introducing the <a href="#ladder_of_abstraction" class="term">ladder of abstraction</a> which is proposed as a measuring tool for structured document formats. Such formats developed prior to the web (Scribe, LaTeX, ODA, SGML) and for the web (HTML, XML) are described. Finally, the role of <a class="term" href="#transformation_language">transformation languages</a> vs. style sheet languages is discussed.</p>
+
+<h3 id="h-13"><a href="#ch-preweb">Chapter 3: Style sheets prior to the web</a></h3>
+
+<p>Chapter 3 is the first chapter in which style sheets are discussed in some detail. The first part of the chapter establishes a set of criteria for style sheet languages; in order to qualify as a style sheet language six components must be present: syntax, <a href="#selector" class="term">selectors</a>, <a href="#property" class="term">properties</a>, <a href="#values" class="term">values</a> and <a href="#unit" class="term">units</a>, <a class="term" href="#value_propagation">value propagation</a> and a <a href="#formatting_model">formatting model</a>. Three style sheet languages developed before the Web (FOSI, DSSSL and P94) are described. The historical background of each is followed by a technical review.</p>
+
+<h3 id="h-14"><a href="#ch-postweb">Chapter 4: Style sheet proposals for the web</a></h3>
+
+<p>This chapter is a survey of the style sheet languages that were proposed for the web in the period 1993-1996. Nine different <a class="term" href="#proposal">proposals</a> are reviewed according to the criteria established in the previous chapter.</p>
+
+<h3 id="h-15"><a href="#ch-webreq">Chapter 5: Web requirements</a></h3>
+
+<p>Publishing on the web is different from other types of electronic publishing.  Six web-specific requirements are discussed in Chapter 5. None of the pre-web style sheet languages nor subsequent style sheet language proposals fulfill all requirements for publishing on the web.</p>
+
+<h3 id="h-16"><a href="#ch-css">Chapter 6: Cascading Style Sheets</a></h3>
+
+<p>This chapter marks the start of the <q>how</q> section of the thesis. In this chapter Cascading Style Sheets (CSS) is described in some detail, and the language is evaluated according to the criteria that were established in <a href="#ch-preweb">Chapter 3</a>. CSS is also evaluated against the web requirements discussed in Chapter 5.</p>
+
+<h3 id="h-19"><a href="#ch-problems">Chapter 7: Problems in CSS</a></h3>
+
+<p>This chapter discusses problems in, and related to, the CSS specifications. These range from simple spelling errors to more complex questions such as whether or not some functionality fulfills its intended role. The chapter is loosely organized along an axis of complexity; the first part describes how simple errors have been handled. Thereafter, real and perceived problems in the specifications are discussed. The last section is dedicated to problems in the cascading mechanism.</p>
+
+<h3 id="h-17"><a href="#ch-ssr">Chapter 8: CSS for small screens</a></h3>
+
+<p>This chapter describes how cascading can be used to render <a class="term" href="#web_page">web pages</a> on small screens. By enforcing a carefully crafted <a class="term" href="#browser_style_sheet">browser style sheet</a>, web pages are reformatted into narrow columns to avoid horizontal scrolling.</p>
+
+<h3 id="h-18"><a href="#ch-clink">Chapter 9: Cascading links</a></h3>
+
+<p>A novel use of CSS to represent hyperlink information rather than stylistic information is discussed in this chapter. Cascading links make it possible to deploy new <a href="#markup_language" class="term">markup languages</a> with hyperlinks in them, without <a href="#user_agent" class="term">user agents</a> knowing how linking information is coded.</p>
+
+<h3 id="h-20"><a href="#ch-future">Chapter 10: Future research</a></h3>
+
+<p>This chapter points to areas of future research and development that are likely to yield beneficial results.</p>
+
+<h3 id="h-21"><a href="#ch-conclusion">Chapter 11: Conclusions</a></h3>
+
+<p>The conclusions support the argument of the thesis: due to its characteristics, the web calls for style sheet languages different from those for traditional electronic publishing. The main contributions of the thesis are listed: the ladder of abstraction, the components of a style sheet language, the web requirements on style sheet languages, and CSS.</p>
+</div>
+
+
+<div class="chapter" id="ch-introduction" title="Introduction">
+<h1 class="chapter" id="h-24">Introduction</h1>
+
+<p>Around 1990, Tim Berners-Lee developed three specifications that formed the basis of the <a href="#world_wide_web">World Wide Web</a> project: the HyperText Markup Language (HTML) was developed as a <a class="term" href="#document_format">document format</a> for the web; Universal Resource Locators (URL) were added to represent <a class="term" href="#link">links</a> between the documents; and the HyperText Transfer Protocol (HTTP) was developed to transfer <a class="term" href="#document">documents</a> between machines on the internet <a href="#Berners-Lee_1999">[Berners-Lee&nbsp;1999]</a>. Both specifications and implementations were made freely available by CERN.</p>
+
+<p>The web quickly gained momentum. With the launch of the National Center for Supercomputing Applications (NCSA) Mosaic browser in 1993 <a href="#Andreessen_1993a">[Andreessen&nbsp;1993a]</a>, <a class="term" href="#user">users</a> suddenly had an attractive browser to <a class="term" href="surf">surf</a> a steadily increasing set of interlinked documents. With an rising number of users, more authors were attracted to the web, and content proliferated.</p>
+
+<p>In the beginning, HTML, was a simple <a href="#structured_document" class="term">structured document</a> format with <a href="#markup" class="term">markup</a> tags added between text strings to indicate the role of the text. For example, a string of text could be marked as a paragraph, while another string could be marked as a clickable link. The elements in early HTML were <a class="term" href="#logical_element">logical</a> rather than <a class="term" href="#presentational_element">presentational</a>. For example, HTML would mark some text as a heading but would not describe how the heading was to be presented. The presentation of text &#8211; including what <a href="#font" class="term">font</a>, color and size to use &#8211; was primarily determined by the browser.</p>
+
+
+<h2 id="h-25">Structure versus presentation</h2>
+
+<p>Scientific environments such as CERN value logic, structure and content more highly than aesthetics, imagery and style. This sense of structure is reflected in HTML. Each paragraph is marked as such and headings are given a numbered level to indicate their place in the document structure.</p>
+
+<p>As the web attracted attention outside of scientific environments, authors started complaining that they did not have enough influence over the appearance of their pages. One of the most frequent questions asked by authors new to the web was how to change fonts and colors of elements. This excerpt from a message sent to the www-talk <a href="#www-talk">[www-talk]</a> mailing list early in 1994 <a href="#Andreessen_1994a">[Andreessen&nbsp;1994a]</a>, gives a sense of the tension between authors and browser implementors<span class="fn">I have quoted from a message sent to a mailing list for the developer community in this chapter, and will do so many times in chapters to come. Mailing lists were crucial for bringing together the web community in the early years, and hypertext archives of mailing lists quickly sprang up in the early 1990s. Today, a decade later, these archives provide valuable insights to the web's design and development. </span>:</p>
+
+<blockquote>In fact, it has been a constant source of delight for me over the past year to get to continually tell hordes (literally) of people who want to &#8211; strap yourselves in, here it comes &#8211; control what their documents look like in ways that would be trivial in TeX, Microsoft Word, and every other common text processing environment: 'Sorry, you're screwed.'</blockquote>
+
+<p>The author of the message was Marc Andreessen, one of the programmers behind the popular NCSA Mosaic browser. He later became a co-founder of Netscape which fullfilled authors' requests by introducing presentational tags in HTML. On October 13, 1994, Netscape announced <a href="#Andreessen_1994b">[Andreessen&nbsp;1994b]</a> the first beta release of their browser. The Netscape browser supported a set of new presentational HTML tags (e.g. <code class="element">CENTER</code> to center text) and more were to follow shortly.</p>
+
+<h3 id="h-26">Abstraction levels</h3>
+
+<p>By adding presentational tags to HTML, the language evolved from being an abstract, structured, markup language where authors marked the different logical roles of the text (paragraphs, headlines, lists and so forth) towards a concrete presentation language where emphasis is on the <a href="#final_form" class="term">final form</a> presentation of documents (fonts, colors and layout).</p>
+
+<p>In traditional paper-based publishing, the <a href="#reader" class="term">reader</a> receives a final form product. Each letter on a printed page has a fixed position, shape, size and color that cannot be changed by the reader. Electronic documents, however, are unfinished products that must be assembled before they can be presented to the human reader. In the assembly process &#8211; better known as <a href="#formatting" class="term">formatting</a> &#8211; many choices of how to present the document are made. For example, the browser must pick the fonts and colors to use when presenting the document on a color screen. The level of processing that an electronic document needs will vary considerably depending on what document format is used. As such, electronic documents are similar to furniture: some furniture comes pre-assembled while other items are bought in flat packages and the owner must do the final assembly. If a document format requires much processing, it is said to have a high level of abstraction. If the document format needs little processing, it is said to have a low level of abstraction.</p>
+
+<p>Determining the right abstraction level is an important part of designing a document format. If the abstraction level is high, both the authoring process and the task of formatting the document become more complex. The author must relate to non-visible abstract concepts. On the receiving end, the browser must transform elements from abstract to concrete objects and this task is more complex if the elements are highly abstract. The benefit of a high abstraction level is that the content can be reused in many contexts. For example, a headline can be presented in large letters on printed sheets, and with a louder voice in a text-to-speech system.</p>
+
+<p>Conversely, a low level of abstraction will make the authoring and formatting process easier (up to a point). Authors can use visually oriented WYSIWYG (What You See Is What You Get) tools, and the browser does not have to perform extensive transformations before presenting the document. The drawback of using presentation-oriented document formats is that the content is not easily reusable in other contexts. For example, it can be difficult to make presentation-oriented documents available on a device with a different screen size, or to a visually impaired person.</p>
+
+<p>When transforming documents from one format to another, the chances are that the two formats are at different abstraction levels. In general, it is possible to transform documents from a higher to a lower abstraction level, but not the other way around. The ladder of abstraction is introduced in this thesis as a way of measuring the level of abstraction.</p>
+
+<h3 id="h-27">Presentational HTML</h3>
+
+
+<p>The introduction of presentational tags in HTML was a downwards move on the ladder of abstraction. Several of the new elements (e.g., <code class="element">BLINK</code>) were meaningful only for particular output devices (how is blinking text displayed in a text-to-speech system?). The creators of HTML intended it to be usable in many settings but presentational tags threatened device independence, accessibility and content reuse.</p>
+
+<p>The development of HTML into a presentation-oriented language also changed the power balance between authors and users. Structured documents must be formatted by the browser before presentation, and &#8211; to some extent &#8211; the formatting process can be influenced by the user. However, when the browser receives a document in its final form, the formatting process is complete and can no longer be influenced by the user.</p>
+
+<p>Web authors had asked for more influence over the document presentation and welcomed this development, but there was also resistance in the web community. Many felt that the web had the potential of realizing personalized publishing where the reader &#8211; rather than the publisher &#8211; was in control. Content should be selectable based on reader preferences, and the medium and form of presentation should also be the choice of the reader. By turning HTML into a presentation language there was a risk of losing the degrees of freedom necessary to realize a user-centric publishing model.</p>
+
+
+<h2 id="h-28">Style sheets</h2>
+
+<p>Style sheets were proposed as an alternative to the evolution of HTML from a structural language to a presentational language. The term <a href="#style_sheet" class="term">style sheet</a> is used in traditional publishing as a way to <q>ensure consistency</q> <a href="#Chicago_1993">[Chicago&nbsp;1993]</a> in documents. In the traditional publishing process, a manuscript is accompanied by a style sheet which serves as a <q>running account of rules about diction and language usage adopted for a particular manuscript</q> <a href="#Bruggemann-Klein_1992">[Brüggemann-Klein&amp;Wood&nbsp;1992]</a>.</p>
+
+<p>In the 1980's, publishing changed dramatically with the introduction of personal computers for use in the preparation of manuscripts. <a href="#electronic_publishing" class="term">Electronic publishing</a> offered tools to ease all stages of publishing from authoring, through editing, to printing. In electronic publishing, the term <a href="#style_sheet" class="term">style sheets</a> came to mean a set of rules regarding how to <em>present</em> content, rather than rules for how to <em>author</em> content. Style sheets would be specified by the <a class="term" href="#designer">designer</a> and sent to the typesetter before printing. Typically, they would describe the visual layout of a text-centric document, including fonts, colors and white space.</p>
+
+<p>In this thesis, the term <a class="term" href="#style_sheet">style sheet</a> refers to a set of rules that associate stylistic properties and values with structural elements in a document, thereby expressing how to present the document. Style sheets generally do not contain content, are linkable from documents, and they are reusable. This definition allows the term to be used in the context of electronic publishing both off and on the web.</p>
+
+<p>Style sheets were available in electronic publishing systems from around 1980 (see Chapter 2 and 3). Combined with structured documents, style sheets offered <a href="#late_binding" class="term">late binding</a> <a href="#Reid_1989">[Reid&nbsp;1989]</a> of content and presentation where the content and the presentation are combined after the authoring is complete. This idea was attractive to publishers for two reasons. First, a consistent style could be achieved across a range of publications. Second, the author did not have to worry about the presentation of the publication but could concentrate on the content.</p>
+
+<p>Indeed, some authors found it liberating not having to worry about presentational details in the authoring process <a href="#Cailliau_1997">[Cailliau&nbsp;1997]</a>. However, most authors ended up using authoring systems which emphasizes the presentation rather than the structure <a href="#Sorgaard_1996">[Sørgaard&nbsp;1996]</a>.</p>
+
+<h3 id="h-29">WYSIWYG &ndash; a competing model</h3>
+
+<p>WYSIWYG &#8211; What You See Is What You Get &#8211; is a competing model for authoring documents. WYSIWYG <a class="term" href="#application">applications</a> constantly update a <a class="term" href="#final_form">final form</a> presentation. As the author types, the screen is updated to reflect the page layout that would result should the document be printed at that point.</p>
+
+<p>Instead of the <a href="#late_binding" class="term">late binding</a> between presentation and content, employed by structured documents and style sheets, WYSIWYG offers <a class="term" href="#instant_binding">instant binding</a>; all editing operations result in instant visual changes to the final presentation. This approach often results in documents whose authors emphasize the final presentation &#8211; which is typically a printed document &#8211; rather than the <a href="#logical_markup" class="term">logical markup</a>.</p>
+
+<p>Several applications try to combine the concept of structured documents with WYSIWYG editing, including Adobe's FrameMaker <a href="#FrameMaker">[FrameMaker]</a>, Microsoft's Word <a href="#MS-Word">[MS-Word]</a> and W3C's Amaya <a href="#Amaya">[Amaya]</a>. Typically, these applications offer the author several views of the document one of which is WYSIWYG and others that are more structural. This makes it possible to author structured documents with a WYSIWYG tool. There is a risk associated with using WYSIWIG tools, however: they also allow authors to make purely presentational modifications which may not be consistent with the document structure.</p>
+
+<h3 id="h-30">Web characteristics</h3>
+
+
+<p>Research has shown that when documents are authored with the printed copy as the final target, it is difficult to motivate authors to work on a logical level rather than a visual level <a href="#Sandahl_1999">[Sandahl&nbsp;1999]</a>. With the emergence of the web, however, the possibilities for reuse of content increases. Instead of printing and distributing documents on paper, web documents are transferred electronically to the user's computer. The shift towards electronic distribution of documents has several key characteristics that influence both the authoring process and style sheet languages.</p>
+
+<ul>
+
+<li>Late binding becomes later binding: On the web, documents are transmitted in electronic form to the user's computer. The <a href="#late_binding" class="term">late binding</a> between content and presentation of electronic publishing becomes even <a href="#later_binding" class="term">later binding</a> on the web. The binding no longer takes place in the publishing house but, rather, in the user's computer. This increases the freedom of the presentation but also poses a new performance challenge since the binding takes place while the user is waiting. Also, the author is not present to make sure that the presentation is correct.</li>
+
+<li>Paper-centric publishing becomes screen-centric: Before the advent of the web, most electronic documents ended up as printed documents. They were edited and processed on computer screens but, most often, the final media type was print. On the web, most users view documents on a screen.</li>
+
+<li>Single output becomes multiple outputs: Although screens are the primary media type on the web, many other types exist. Authors do not know what kind of output device will be employed by a user. There is no longer one final form presentation, there are many. Therefore, it is important that style sheets can describe presentations for multiple output devices.</li>
+
+<li>Author control becomes shared author/user influence: Since the binding between content and presentation takes place in the user's computer, influences from several sources may be combined to form a presentation. Given this freedom, it seems reasonable that the user &#8211; as well as the author &#8211; should be able to influence the presentation. Personalized presentations based on the needs and preferences of the user become possible. This is different from other publishing environments where authors and publishers have full control of the presentation.</li>
+
+<li>Stand-alone documents become hyperlinked: The web is a large collection of hyperlinked documents and information that was previously expressed as textual references can now be active hyperlinks.</li>
+
+<li>Dependable delivery becomes uncertain: Web resources are distributed across many connected computers and the chance of a resource not being available is significant. Another change is that the web is more likely to fail than are in-house publishing systems. It is natural to make the style sheet available on the web, but the resource may not always be available at the user's end.</li>
+
+</ul>
+
+<p>Thus, with the introduction of the web the focus of style sheets is shifted from being an author's tool in the authoring process to being a tool for content reuse after the content has been generated. Style sheets on the web are potentially more important than are style sheets for paper-centric publishing because the possibility of content reuse is greater. Just as the nature of style sheets changed from paper-based publishing to electronic publishing, so has the nature of style sheets changed again for web publishing.</p>
+
+<h3 id="h-32">Style sheet mechanisms for the web</h3>
+
+<p>A crude form of style sheets was hard-coded into the first WWW <a class="term" href="#client">client</a> implemented on the NeXT machine at CERN. However, no specification for style sheets was written and no syntax for a style sheet language was proposed; it was considered a matter for each browser to decide how to best display pages to its users.</p>
+
+<p>The potential benefits of using style sheets on the web are significant. A well-developed style sheet mechanism would give authors a richer stylistic vocabulary than they could hope for in an evolving HTML. Also, HTML would remain a structured markup language that worked on a wide range of devices.</p>
+
+<p>For these reasons, many people on the www-talk mailing list <a href="#www-talk">[www-talk]</a>, which was the electronic meeting place for the early web community, agreed that the web could benefit from style sheets. However, there was disagreement as to whether or not the web would require a new style sheet language or if one of the existing languages, designed primarily for paper-based publishing, would be suitable.</p>
+
+<p>Several style sheet languages for the web were proposed in 1993 (see <a href="#ch-postweb">Chapter 4: Style sheet proposals for the web</a>) but none of them gained momentum. This was mostly due to lack of support in browsers; as long as Mosaic &#8211; by far the most popular browser of its day &#8211; did not support style sheets there was little motivation for authors to write them. Also, none of the proposals were developed to a stable state. A successful style sheet language for the web had to be compelling enough both for browser developers to implement, and for authors to use.</p>
+
+<h2 id="h-33">CSS</h2>
+
+<p>Three days before Netscape announced their new browser, this author published the first CSS proposal (named <em class="title">Cascading HTML style sheets &#8211; a proposal</em>) <a href="#Lie_1994">[Lie&nbsp;1994]</a> on the web. In addition to describing fonts, colors and layout of documents &#8211; which several proposals had done previously &#8211; CSS introduced new functionality to account for the differences in publishing imposed by the web. The concept of <a href="#cascading" class="term">cascading</a> allowed both authors and users to influence the presentation of a document:</p>
+
+<blockquote>The proposed scheme supplies the brower with an ordered list (cascade) of style sheets. The user supplies the initial sheet which may request total control of the presentation, but &#8211; more likely &#8211; hands most of the influence over to the style sheets referenced in the incoming document.</blockquote>
+
+<p>Negotiating between the needs and wishes of readers and authors was one of the main ambitions of CSS. If successful, authors would get their fair share of influence over the presentation and would not feel compelled to use presentational HTML and other tricks. Readers, on the other hand, would be served documents in a form in which they could choose between accepting the author's suggested presentation or specify their own.</p>
+
+<p>In many cases there would be no conflict between the author and the reader. Neither would want to specify the presentation of the document. In such cases, it is important for the browser to have a <a href="#default_style_sheet" class="term">default style sheet</a> that describes a default presentation of HTML documents. CSS, therefore, defines three possible sources for style sheets: authors, readers, and browsers. CSS is able to combine style sheets from these sources to form the presentation of a document. The process of combining several style sheets &#8211; and resolving conflicts if they occur &#8211; is known as cascading.</p>
+
+<h3 id="h-34">The CSS development</h3>
+
+<p>The first CSS proposal was put forward in the spirit of open exchange of ideas on how the web should develop, and discussions took place on public mailing lists. A number of people responded to the proposal <a href="#Bos_1994">[Bos&nbsp;1994]</a><a href="#Behlendorf_1994">[Behlendorf&nbsp;1994]</a><a href="#Wei_1994">[Wei&nbsp;1994]</a> and the <a class="term" href="#draft">draft</a> was developed further. During the course of 1995, approximately eight revisions were published. The last of these, published in December 1995, was declared to be stable and browser vendors were <q>encouraged to use it as a base for implementations</q> <a href="#Lie_1996">[Lie&nbsp;1996]</a>.</p>
+
+<p>With a few minor exceptions, the syntax from the draft of December 1995 has remained stable and the first section of the specification can still serve as an introduction to CSS:</p>
+
+<blockquote>Designing simple style sheets is easy. One only needs to know a little HTML and some basic desktop publishing terminology. E.g., to set the text color of 'H1' elements to blue, one can say: 
+
+<pre>  H1 { color: blue } 
+</pre>
+
+The example consists of two main parts: selector ('H1') and declaration ('color: blue'). The declaration has two parts, property ('color') and value ('blue').</blockquote>
+
+<p>The CSS1 specification became a W3C Recommendation <a href="#CSS1_1996">[CSS1&nbsp;1996]</a> in December 1996. In May 1998 CSS2 became a W3C Recommendation <a href="#CSS2_1998">[CSS2&nbsp;1998]</a>. <a href="#ch-css">Chapter 6 (Cascading Style Sheets)</a> describes the development of the Recommendations in more detail.</p>
+
+<p>A decade after the first CSS proposal was published, all major web browsers support CSS and a majority of web pages use CSS. It may still be too early to fully evaluate CSS and its impact on the web, but it possible to study the design of CSS and compare it with other style sheet languages and style sheet language proposals.</p>
+
+<h2 id="h-35">Summary and conclusions</h2>
+
+<p>This chapter introduces some of the key concepts of this thesis. HTML was developed as a simple structured document format for the web. As web authors requested more presentational influence over their documents, HTML started developing into a presentational rather than a structural language. To stop this downwards slide on the ladder of abstraction, CSS was developed as a style sheet language for the web. Style sheets have been part of electronic publishing systems since around 1980. On the web, the focus of style sheets is shifted from being a tool in the authoring process to being a tool for content reuse after the content has been generated.</p>
+
+<p>The thesis explores in more detail <em>why</em> the web requires style sheet languages different from those in other kinds of publishing, and <em>how</em> such a language can be designed. Before doing so, however, it is necessary to discuss two other topics. First, structured documents must be understood since style sheets are applied to structured documents. Second, style sheet languages developed before the advent of the web must be researched to determine if any of these languages are suitable for use on the web. This is done in Chapter 2 and Chapter 3, respectively.</p>
+</div>
+
+<div class="chapter" id="ch-structure" title="Structured documents">
+<h1 class="chapter" id="h-36">Structured documents</h1>
+
+<p>Style sheet languages and structured document formats are mutually dependent on each other. Without style sheets, structured documents cannot be presented, and without structured documents there is nothing for style sheets to present. Due to the strong relationship between the two, it is important to understand structured documents when studying style sheet languages. Some <a class="term" href="#structured_document_system">structured document systems</a> that have been most influential on style sheet languages are discussed in this chapter.</p>
+
+<p>In a seminal work titled <em class="title">Structured Documents</em> <a href="#Andre_1989">[André,&nbsp;et&nbsp;al.&nbsp;1989]</a>, the topic is defined&nbsp;as:</p>
+
+<blockquote>A document may be described as a collection of objects with higher-level objects formed from more primitive objects. The object relationships represent the logical relationships between components of the document. For example, the present document is described as a book at the highest level. The book is subdivided into chapters, each chapter into sections, subsections, paragraphs, and so forth. Such a document organization has come to be known as the <em>structured document</em> representation.</blockquote>
+
+<p>One important feature of the structured document representation is that it has a certain level of abstraction. The level of abstraction is especially important when the structured document is combined with a style sheet to form a presentation. Therefore, the first part of this chapter discusses abstraction levels in structured documents and proposes a <a href="#ladder_of_abstraction" class="term">ladder of abstraction</a> to measure the level of abstraction in web document formats.</p>
+
+<p>The second part of the chapter describes seminal structured document systems, namely Scribe; LaTex; Open Document Architecture (ODA); Standard Generalized Markup Language (SGML); HyperText Markup Language (HTML); and Extensible Markup Language (XML). Each of the systems is briefly described historically and technically with special emphasis on their relationships with style sheet languages.</p>
+
+<p>A third part discusses the relationship between transformation languages and style sheet languages on the web.</p>
+
+<h2 id="h-37">Abstraction levels</h2>
+
+<p>In his book, <em class="title">Language in Action</em>, Hayakawa <a href="#Hayakawa_1940">[Hayakawa&nbsp;1940]</a> introduces the notion of a linguistic ladder of abstraction. At the bottom of the abstraction ladder is an object. As an example, Hayakawa uses a cow named <em>Bessie</em>. The cow is composed of muscle, bones, skin and other biological parts. As the first step up the ladder, we disregard the biology inside the cow but retain its physical properties &#8211; for example its color, size and shape &#8211; and we call it Bessie. Bessie is just one of many objects that can be classified as <em>cows</em>. On the farm where Bessie lives, there are many other kinds of animals that can all be referred to as <em>livestock</em>. The climb up the ladder of abstraction can continue to <em>farm assets</em> and <em>wealth</em>. This concept is illustrated in Figure 1.</p>
+
+<div id="f-1" class="figure">
+<!--<p><img class="figure" src="i/abstraction-ladder.jpg" alt="The ladder of abstraction." /></p>-->
+<p><img class="figure" src="i/ladder-600dpi.png" alt="The ladder of abstraction." /></p>
+
+<p class="caption">The ladder of abstraction. Illustration reprinted from Hayakawa <a href="#Hayakawa_1940">[Hayakawa&nbsp;1940]</a>.</p>
+</div>
+
+
+<p>A similar example of abstraction levels can be found in the field of computer networking. In 1983, the International Standards Organization (ISO) developed a network model called Open Systems Interconnection (OSI) Reference Model which defined a framework of computer communications. The ISO/OSI Reference Model has seven layers, each of which has a different level of abstraction. The seven layers are: physical, data link, network, transport, session, presentation and application.</p>
+
+<p>I believe the notion of an abstraction ladder is useful when evaluating document formats. How high a certain document format is on the ladder will determine the complexity of formatting the document into a presentation. Since the formatting of a document is specified by a style sheet, the abstraction level is a crucial feature for the success of style sheets.</p>
+
+<p>The vertical nature of a ladder corresponds to how one describes abstraction levels as <em>high</em> or <em>low</em>. Typical characteristics of document formats that are high on the ladder of abstraction are:</p>
+
+<ul>
+
+<li>The information needs processing in order to be presented. For example, in order to render an HTML document visually, the words must be broken into lines, fonts must be selected, and the <a class="term" href="#character">characters</a> must be turned into rasterized <a class="term" href="#glyph">glyphs</a>.</li>
+
+<li>The information can be processed and presented in many different ways. Presenting a document visually is only one of several possibilities; others include aural renderings and braille embedding.</li>
+
+<li>The information is represented in a compact manner. Representing a character with an eight-bit code is more compact than representing an image of the same character.</li>
+
+</ul>
+
+<p>Conversely, documents written in formats that are low on the ladder of abstraction need less processing in order to be presented, they have less flexibility of presentation, and they are less compact.</p>
+
+<p>Another important observation is that it is generally possible to transform documents downwards on the ladder but much more difficult to move the other way <a href="#Lie_1999">[Lie&amp;Saarela&nbsp;1999]</a>. For example, graphical web browsers &#8211; in collaboration with the windowing system &#8211; rasterize HTML documents into pixels and thereby move information downwards on the ladder of abstraction. Optical Character Recognition (OCR) software attempts to climb the ladder by turning images into text, but OCR systems only work under certain conditions and are prone to errors. Similarly, it is impossible to devise an algorithm that converts documents written in a Turing-complete language due to the halting problem <a href="#Connolly_1994a">[Connolly&nbsp;1994a]</a>.</p>
+
+<p>In the context of web document formats, I believe the following criteria can be used to establish the steps in the ladder of abstraction:</p>
+
+<ul>
+
+<li>Is the text human-readable? That is, if the document is presented to a human reader, will he/she be able to read the document?</li>
+
+<li>Is the text machine-readable? That is, does the format have a notion of numbered characters, or does it represent text as images &#8211; in which case the text is not available.</li>
+
+<li>Is the logical order of text preserved? That is, do documents written in the format have a notion of the logical reading order of the content?</li>
+
+
+<li>Is the document scalable? That is, can the document be zoomed in without introducing visible artefacts?</li>
+
+<li>Is reflow possible? That is, can text be reflowed into lines, columns and pages of different dimensions?</li>
+
+<li>Can the roles of the various text elements be represented? For example, can the author mark part of the text as a headline, a paragraph, or perhaps as the name of a variable in a computer program? Being able to distinguish between these roles is important. When making documents available in braille, for example, some text should be contracted (e.g. headlines), while other text should not (e.g. variable names) <a href="#Lorimer_1996">[Lorimer&nbsp;1996]</a>.</li>
+
+<li>Is the format device-independent? That is, can documents written in the format be rendered into many different devices (e.g. printers, screens, braille printers, and text synthesizers) or are documents intended for a single type of device?</li>
+
+<li>Does the format contain application-specific semantics? HTML is a general document format that does not attempt to describe semantics from more specialized fields, e.g. mathematics and chemistry, and therefore does not contain application-specific semantics. Formats that contain application-specific semantics tend to be higher on the ladder of abstraction.</li>
+
+</ul>
+
+<div class="table" id="t-1">
+<p class="caption">A comparison of document formats on the ladder of abstraction.</p>
+
+<table summary="" class="page">
+<thead>
+<tr>
+<th></th>
+<th>GIF, PNG</th>
+<th>private XML<br />
+vocabulary</th>
+<th>PDF</th>
+<th>XSL-FO</th>
+<th>HTML</th>
+<th>MathML</th>
+</tr>
+</thead>
+
+<tr>
+<td>application-<br />
+specific semantics?</td>
+<td class="no">no</td>
+<td class="no">no</td>
+<td class="no">no</td>
+<td class="no">no</td>
+<td class="no">no</td>
+<td class="yes">yes</td>
+</tr>
+
+<tr>
+<td>device-independent?</td>
+<td class="no">no</td>
+<td class="no">no</td>
+<td class="no">no</td>
+<td class="no">no</td>
+<td class="yes">yes</td>
+<td class="yes">yes</td>
+</tr>
+
+<tr>
+<td>roles known?</td>
+<td class="no">no</td>
+<td class="no">no</td>
+<td class="no">no</td>
+<td class="no">no</td>
+<td class="yes">yes</td>
+<td class="yes">yes</td>
+</tr>
+
+<tr>
+<td>text in logical order?</td>
+<td class="no">unknown</td>
+<td class="no">unknown</td>
+<td class="no">no</td>
+<td class="yes">yes</td>
+<td class="yes">yes</td>
+<td class="yes">yes</td>
+</tr>
+
+<tr>
+<td>reflow possible?</td>
+<td class="no">no</td>
+<td class="no">unknown</td>
+<td class="no">no</td>
+<td class="yes">yes</td>
+<td class="yes">yes</td>
+<td class="yes">yes</td>
+</tr>
+
+<tr>
+<td>scalable?</td>
+<td class="no">no</td>
+<td class="no">unknown</td>
+<td class="yes">yes</td>
+<td class="yes">yes</td>
+<td class="yes">yes</td>
+<td class="yes">yes</td>
+</tr>
+
+<tr>
+<td>text machine-readable?</td>
+<td class="no">no</td>
+<td class="yes">yes</td>
+<td class="yes">yes</td>
+<td class="yes">yes</td>
+<td class="yes">yes</td>
+<td class="yes">yes</td>
+</tr>
+
+<tr>
+<td>text human-readable?</td>
+<td class="yes">yes</td>
+<td class="yes">yes</td>
+<td class="yes">yes</td>
+<td class="yes">yes</td>
+<td class="yes">yes</td>
+<td class="yes">yes</td>
+</tr>
+</table>
+</div>
+
+<p>Table 1 shows the relative positions of various document formats on the ladder of abstraction. Some notes to the table:</p>
+
+<ul>
+
+<li>GIF <a href="#GIF_1990">[GIF&nbsp;1990]</a> and PNG <a href="#PNG_1996">[PNG&nbsp;1996]</a> are bitmap image formats rather than document formats, but images are often used to represent documents. Fax transmission is a common example outside the web.</li>
+
+<li>PDF <a href="#Adobe_1993">[Adobe&nbsp;1993]</a> is a document format developed by Adobe Systems. PDF is a presentation-oriented format and has no concept of, for example, paragraphs and headings. Many users have discovered this when trying to copy content from PDF documents laid out in several columns. When selecting text, the selection will span across multiple columns and thereby mix text from several parts of the document into the same selection. Recent versions of PDF have introduced functionality to retain a document's logical structure in PDF <a href="#Adobe_2001">[Adobe&nbsp;2001]</a>.</li>
+
+<li>XSL-FO refers to a document consisting of formatting objects as defined in the XSL Recommendation <a href="#XSL_2001">[XSL&nbsp;2001]</a>. XSL-FO is discussed later in this chapter.</li>
+
+<li>XML <a href="#XML_1998">[XML&nbsp;1998]</a>, in which several of the emerging formats are written, is also included in the table and refers to documents published using private XML vocabularies where the semantics are not universally known.</li>
+
+<li>The rating of HTML is based on a best-case scenario where the author makes use of semantic elements and does not alter the reading order of elements by using features such as positioning or tables. It may be argued that most HTML documents do not follow these conventions.</li>
+
+<li>MathML is a W3C Recommendation for mathematical notation <a href="#MathML_1998">[MathML&nbsp;1998]</a>.</li>
+
+</ul>
+
+<p>Having established the ladder of abstraction as a measuring tool for structured document formats, the next section discusses structured document systems in more detail.</p>
+
+<h2 id="h-38">Structured document systems</h2>
+
+<p>Beginning around 1980, there was an active research community in the field of electronic publishing and structured documents. The community published their results in the proceedings of the <em class="title">Electronic Publishing</em> conferences, in the journal <em class="title">Electronic Publishing &#8211; Origination, Dissemination and Design</em> <a href="#EP">[Electronic&nbsp;Publishing]</a>, and Cambridge University Press published a series of books on the topic. Richard Furuta lists many of the important works in <em class="title">Important papers in the history of document preparation systems: basic sources</em> <a href="#Furuta_1992">[Furuta&nbsp;1992]</a>.</p>
+
+<p>The researchers generally agreed on the benefits of vendor-neutral document formats to facilitate document exchange. The benefits of structured documents were also well understood. There were, however, several approaches to structured documents, and competing formats were developed. This section describes and discusses four of them.</p>
+
+<p>One line of development started in the late 1
