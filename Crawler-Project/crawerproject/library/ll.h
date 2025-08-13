@@ -21,7 +21,6 @@ private:
     llNode<valType> *head;
     llNode<valType> *getNode(valType val);
 
-    // for matching various type of data structure for all operations
     bool isMatched(const string &val1, const string &val2);
     bool isMatched(const char *val1, const char *val2);
     bool isMatched(int val1, int val2);

@@ -34,7 +34,6 @@ public:
     ~hashTable()
     {
         clear();
-        delete[] hashmap;
         hashmap = nullptr;
     }
 
