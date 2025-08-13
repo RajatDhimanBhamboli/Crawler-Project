@@ -6,12 +6,12 @@ using namespace std;
 
 void most_frequent_word(char *text, const char **stopwords, int stopcount, char *url)
 {
-    ofstream out("visited.txt", ios::app);
+    ofstream visit("visited.txt", ios::app);
 
-    if (out.is_open())
+    if (visit.is_open())
     {
-        out << "Url is : " << url << " , FrequentWord ->" << mostWord << ", Count : " << maxCount << "\n";
-        out.close();
+        visit << url<< "\n";
+        visit.close();
     }
     char *lower_text = lowercase(text);
     if (!lower_text)
